@@ -6,11 +6,12 @@
 /*   By: samarkar <samarkar@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/14 17:31:20 by lucpelle          #+#    #+#             */
-/*   Updated: 2026/01/20 18:49:06 by samarkar         ###   ########lyon.fr   */
+/*   Updated: 2026/01/20 19:45:02 by samarkar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+#include <stdio.h>
 
 size_t	choose_metric(size_t strategy, float metric)
 {
@@ -53,6 +54,8 @@ void	push_swap(char **args, t_tab *a, t_tab *b, size_t size)
 	b->size = 0;
 	strategy = set_tab(strategy, a, args, size);
 	metric = compute_disorder(a);
+	if (metric == 0.000000)
+		return ;
 	if (strategy == 0 || strategy == 4)
 		strategy = choose_metric(strategy, metric);
 	b->tab = malloc(sizeof(int) * size);

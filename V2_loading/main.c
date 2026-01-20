@@ -6,7 +6,7 @@
 /*   By: samarkar <samarkar@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/15 13:48:46 by samarkar          #+#    #+#             */
-/*   Updated: 2026/01/19 19:12:48 by samarkar         ###   ########lyon.fr   */
+/*   Updated: 2026/01/20 19:20:35 by samarkar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,8 @@ int	main(int ac, char **av)
 	char	**args;
 	size_t	size;
 
+	if (ac < 2)
+		return (0);
 	a = malloc(sizeof(t_tab));
 	b = malloc(sizeof(t_tab));
 	init_stack(a);
@@ -53,4 +55,5 @@ int	main(int ac, char **av)
 	push_swap(args, a, b, size);
 	free(a);
 	free(b);
+	return (0);
 }
