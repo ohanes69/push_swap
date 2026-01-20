@@ -6,7 +6,7 @@
 /*   By: samarkar <samarkar@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/19 14:07:23 by samarkar          #+#    #+#             */
-/*   Updated: 2026/01/19 19:19:18 by samarkar         ###   ########lyon.fr   */
+/*   Updated: 2026/01/20 18:56:58 by samarkar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,15 @@
 #include "ft_printf.h"
 #include <stdio.h>
 
-float	ft_mod(float x, int y)
+static float	ft_mod(float x, int y)
 {
 	float	left_nb;
 
-	left_nb = x - (float)((int)(x / y) * y);
+	left_nb = x - (float)((int)(x / y)*y);
 	return (left_nb);
 }
 
-void	print_disorder(float disorder)
+static void	print_disorder(float disorder)
 {
 	char	i;
 
@@ -49,11 +49,12 @@ void	print_disorder(float disorder)
 	ft_printf("%%");
 }
 
-void	operations(t_tab *a)
+static void	operations(t_tab *a)
 {
 	int	total_ops;
 
-	total_ops = a->sa + a->sb + a->ss + a->pa + a->pb + a->ra + a->rb + a->rr + a->rra + a->rrb + a->rrr;
+	total_ops = a->sa + a->sb + a->ss + a->pa + a->pb
+		+ a->ra + a->rb + a->rr + a->rra + a->rrb + a->rrr;
 	ft_printf("\n[bench] total_ops: ");
 	ft_printf("%d", total_ops);
 	ft_printf("\n[bench] ");
@@ -71,13 +72,9 @@ void	operations(t_tab *a)
 	ft_printf("rrr: %d\n", a->rrr);
 }
 
-void	strategy_use(size_t strategy, t_tab *a, char **args, size_t size)
+void	strategy_use(size_t strategy, t_tab *a, float metric)
 {
-	float	disorder;
-
-	strategy = bench_strategy(strategy, a, args, size);
-	disorder = compute_disorder(a);
-	print_disorder(disorder);
+	print_disorder(metric);
 	ft_printf("\n[bench] ");
 	ft_printf("strategy:");
 	if (strategy == 1)
@@ -86,14 +83,5 @@ void	strategy_use(size_t strategy, t_tab *a, char **args, size_t size)
 		ft_printf(" Medium / O(n√n)");
 	else if (strategy == 3)
 		ft_printf(" Complex / O(n log n)");
-	else
-	{
-		if (disorder < 0.2)
-			ft_printf(" Adaptative / O(n²)");
-		else if (disorder >= 0.2 && disorder < 0.5)
-			ft_printf(" Adaptative / O(n√n)");
-		else if (disorder >= 0.5)
-			ft_printf(" Adaptative / O(n log n)");
-	}
 	operations(a);
 }

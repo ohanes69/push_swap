@@ -6,7 +6,7 @@
 /*   By: samarkar <samarkar@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/12 21:52:01 by samarkar          #+#    #+#             */
-/*   Updated: 2026/01/19 17:58:42 by samarkar         ###   ########lyon.fr   */
+/*   Updated: 2026/01/20 18:53:37 by samarkar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,12 +33,14 @@ typedef struct s_tab
 	int	rrr;
 }	t_tab;
 
-void	strategy_use(size_t strategy, t_tab *a, char **args, size_t size);
+void	strategy_use(size_t strategy, t_tab *a, float metric);
 
-size_t	bench_strategy(size_t strategy, t_tab *a, char **args, size_t size);
 size_t	set_tab(size_t strategy, t_tab *a, char **args, size_t size);
 
-// void    set_tab(size_t strategy, t_tab *a, char **args, size_t size);
+int		is_valid_int(const char *s);
+void	is_duplicate(t_tab *a, size_t size);
+int		find_index(int nb, size_t size, int *buffer);
+void	indexing(t_tab *a, size_t size);
 
 void	print_error(void);
 
@@ -76,13 +78,9 @@ void	complex_sort(t_tab *a, t_tab *b, size_t size);
 size_t	find_range_chunk(size_t n);
 size_t	find_numbers_chunks(size_t tab_size, size_t chunk_range);
 size_t	find_high_chunk(size_t chunk_pos, size_t chunk_range, size_t tab_size);
-
-void	push_to_a(t_tab *a, t_tab *b);
-
-// void	push_all_chunks_to_b(size_t tab_size, t_tab *a, t_tab *b);
-
 int		is_in_chunk(t_tab *a, size_t low, size_t high);
 size_t	get_minimal_distance(t_tab *a, size_t pos);
 void	rotate_to_top(t_tab *a, size_t pos);
+void	push_to_a(t_tab *a, t_tab *b);
 
 #endif
