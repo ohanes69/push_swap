@@ -6,7 +6,7 @@
 /*   By: lucpelle <lucpelle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/16 18:46:08 by lucpelle          #+#    #+#             */
-/*   Updated: 2026/01/17 18:57:00 by lucpelle         ###   ########.fr       */
+/*   Updated: 2026/01/21 15:50:09 by lucpelle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include <limits.h>
 #include "push_swap.h"
 
-static int	is_valid_int(const char *s)
+int	is_valid_int(const char *s)
 {
 	size_t	i;
 	size_t	digits;
@@ -43,7 +43,7 @@ static int	is_valid_int(const char *s)
 	return ((int)value);
 }
 
-static void	is_duplicate(t_tab *a, size_t size)
+void	is_duplicate(t_tab *a, size_t size)
 {
 	size_t	i;
 	size_t	j;
@@ -62,7 +62,7 @@ static void	is_duplicate(t_tab *a, size_t size)
 	}
 }
 
-static int	find_index(int nb, size_t size, int *buffer)
+int	find_index(int nb, size_t size, int *buffer)
 {
 	size_t	i;
 	int		pos;
@@ -78,7 +78,7 @@ static int	find_index(int nb, size_t size, int *buffer)
 	return (pos);
 }
 
-static void	indexing(t_tab *a, size_t size)
+void	indexing(t_tab *a, size_t size)
 {
 	size_t	i;
 	int		*buffer;
@@ -94,33 +94,4 @@ static void	indexing(t_tab *a, size_t size)
 		++i;
 	}
 	free(buffer);
-}
-
-void	set_tab(size_t strategy, t_tab *a, char **args, size_t size)
-{
-	size_t	i;
-
-	a->tab = malloc(sizeof(int) * size);
-	if (!a->tab)
-		return ;
-	if (strategy > 0)
-	{
-		i = 1;
-		while (i - 1 < size)
-		{
-			a->tab[i - 1] = is_valid_int(args[i]);
-			++i;
-		}
-	}
-	else
-	{
-		i = 0;
-		while (i < size)
-		{
-			a->tab[i] = is_valid_int(args[i]);
-			++i;
-		}
-	}
-	indexing(a, size);
-	is_duplicate(a, size);
 }

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   complexe_sort.c                                    :+:      :+:    :+:   */
+/*   complex_sort.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lucpelle <lucpelle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/06 15:11:27 by lucpelle          #+#    #+#             */
-/*   Updated: 2026/01/17 17:59:35 by lucpelle         ###   ########.fr       */
+/*   Updated: 2026/01/21 15:56:28 by lucpelle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,13 +29,22 @@ void	complex_sort(t_tab *a, t_tab *b, size_t size)
 		while (i < size)
 		{
 			if ((a->tab[0] >> current_bits & 1) == 0)
+			{
 				push(a, b, "pb");
+				a->pb++;
+			}
 			else
+			{
 				rotate(a, "ra");
+				a->ra++;
+			}
 			++i;
 		}
 		while (b->size != 0)
+		{
 			push(b, a, "pa");
+			a->pa++;
+		}
 		++current_bits;
 	}
 }

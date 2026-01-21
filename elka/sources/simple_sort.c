@@ -6,7 +6,7 @@
 /*   By: lucpelle <lucpelle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/30 20:52:31 by lucpelle          #+#    #+#             */
-/*   Updated: 2026/01/16 20:01:33 by lucpelle         ###   ########.fr       */
+/*   Updated: 2026/01/21 15:57:09 by lucpelle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,19 @@ static void	min_to_top(t_tab *a, size_t pos, size_t i)
 	if (pos <= a->size / 2)
 	{
 		while (pos--)
+		{
 			rotate(a, "ra");
+			a->ra++;
+		}
 	}
 	else
 	{
 		i = a->size - pos;
 		while (i--)
+		{
 			reverse_rotate(a, "rra");
+			a->rra++;
+		}
 	}
 }
 
@@ -53,10 +59,19 @@ void	simple_sort(t_tab *a, t_tab *b)
 	while (a->size > 2)
 	{
 		find_min(a);
-		push(a, b, "pb");
+		{
+			push(a, b, "pb");
+			a->pb++;
+		}
 	}
 	if (a->tab[0] > a->tab[1])
+	{
 		swap(a, "sa");
+		a->sa++;
+	}
 	while (b->size > 0)
+	{
 		push(b, a, "pa");
+		a->pa++;
+	}
 }

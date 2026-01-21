@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   medium_sort.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lucpelle <lucpelle@student.42.fr>          +#+  +:+       +#+        */
+/*   By: samarkar <samarkar@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/12 20:18:46 by samarkar          #+#    #+#             */
-/*   Updated: 2026/01/16 19:50:35 by lucpelle         ###   ########.fr       */
+/*   Updated: 2026/01/19 17:48:33 by samarkar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ void	rotate_to_top(t_tab *a, size_t pos)
 		while (i < dist_top)
 		{
 			rotate(a, "ra");
+			a->ra++;
 			i++;
 		}
 	}
@@ -34,6 +35,7 @@ void	rotate_to_top(t_tab *a, size_t pos)
 		while (i < dist_bot)
 		{
 			reverse_rotate(a, "rra");
+			a->rra++;
 			i++;
 		}
 	}
@@ -74,6 +76,7 @@ static void	rotate_push_element(t_tab *a, t_tab *b, size_t low, size_t high)
 		return ;
 	rotate_to_top(a, pos);
 	push(a, b, "pb");
+	a->pb++;
 }
 
 static void	push_chunk_to_b(t_tab *a, t_tab *b, size_t low, size_t high)
@@ -82,7 +85,10 @@ static void	push_chunk_to_b(t_tab *a, t_tab *b, size_t low, size_t high)
 	{
 		rotate_push_element(a, b, low, high);
 		if (b->tab[0] <= (int)((low + high) / 2))
+		{
 			rotate(b, "rb");
+			a->rb++;
+		}
 	}
 }
 
