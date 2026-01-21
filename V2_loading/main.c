@@ -6,7 +6,7 @@
 /*   By: samarkar <samarkar@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/15 13:48:46 by samarkar          #+#    #+#             */
-/*   Updated: 2026/01/20 19:20:35 by samarkar         ###   ########lyon.fr   */
+/*   Updated: 2026/01/21 17:09:47 by samarkar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,13 @@ void	init_stack(t_tab *stack)
 	stack->rra = 0;
 	stack->rrb = 0;
 	stack->rrr = 0;
+}
+
+static void	free_all(char **args, t_tab *a, t_tab *b)
+{
+	ft_free_tab(args);
+	free(a);
+	free(b);
 }
 
 static size_t	nb_args(char **args)
@@ -49,11 +56,22 @@ int	main(int ac, char **av)
 		return (0);
 	a = malloc(sizeof(t_tab));
 	b = malloc(sizeof(t_tab));
+	args = NULL;
 	init_stack(a);
+	if (!a || !b)
+	{
+		free_all(args, a, b);
+		return (0);
+	}
 	args = parsing(ac, av);
+	if (!args)
+	{
+		free_all(args, a, b);
+		return (0);
+	}
 	size = nb_args(args);
 	push_swap(args, a, b, size);
-	free(a);
-	free(b);
-	return (0);
+	free(a->tab);
+	free(b->tab);
+	free_all(args, a, b);
 }

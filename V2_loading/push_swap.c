@@ -6,7 +6,7 @@
 /*   By: samarkar <samarkar@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/14 17:31:20 by lucpelle          #+#    #+#             */
-/*   Updated: 2026/01/21 14:58:21 by samarkar         ###   ########lyon.fr   */
+/*   Updated: 2026/01/21 17:09:13 by samarkar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,7 @@ void	push_swap(char **args, t_tab *a, t_tab *b, size_t size)
 	is_bench = strategy;
 	size = find_size(args, strategy, size);
 	a->size = size;
+	a->tab = malloc(sizeof(int) * size);
 	b->size = 0;
 	strategy = set_tab(strategy, a, args, size);
 	metric = compute_disorder(a);

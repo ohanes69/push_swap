@@ -6,7 +6,7 @@
 /*   By: samarkar <samarkar@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/06 16:32:02 by samarkar          #+#    #+#             */
-/*   Updated: 2026/01/15 18:01:24 by samarkar         ###   ########lyon.fr   */
+/*   Updated: 2026/01/21 16:45:49 by samarkar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,11 @@ size_t	count_args(int argc, char **argv)
 		j = 0;
 		split = ft_split(argv[i], ' ');
 		if (!split)
+		{
+			ft_free_tab(split);
 			print_error();
+			return (0);
+		}
 		while (split[j])
 		{
 			count++;
@@ -41,7 +45,7 @@ size_t	count_args(int argc, char **argv)
 	return (count);
 }
 
-void	fill_args(char **args, char **split, size_t *k)
+char	**fill_args(char **args, char **split, size_t *k)
 {
 	size_t	j;
 
@@ -51,13 +55,14 @@ void	fill_args(char **args, char **split, size_t *k)
 		args[*k] = ft_strdup(split[j], '\n');
 		if (!args[*k])
 		{
-			ft_free_tab(split);
 			ft_free_tab(args);
 			print_error();
+			return (NULL);
 		}
 		j++;
 		(*k)++;
 	}
+	return (args);
 }
 
 char	**parsing(int argc, char **argv)
@@ -69,17 +74,29 @@ char	**parsing(int argc, char **argv)
 	size_t	k;
 
 	total = count_args(argc, argv);
+	if (!total)
+		return (NULL);
 	args = ft_calloc(total + 1, sizeof(char *));
 	if (!args)
-		print_error();
+		return (NULL);
 	i = 1;
 	k = 0;
 	while (i < (size_t)argc)
 	{
 		split = ft_split(argv[i], ' ');
 		if (!split)
+		{
+			ft_free_tab(args);
 			print_error();
-		fill_args(args, split, &k);
+			return (NULL);
+		}
+		args = fill_args(args, split, &k);
+		if (!args)
+		{
+			ft_free_tab(args);
+			ft_free_tab(split);
+			return (NULL);
+		}
 		ft_free_tab(split);
 		i++;
 	}
