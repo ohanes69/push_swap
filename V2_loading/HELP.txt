@@ -1,0 +1,8 @@
+A CORRIGER :
+
+Pouvoir inverser --bench et --strategy.
+Refactoriser les fonctions trop longues.
+Faire marcher le disorder.
+Norminette.
+Clean.
+Full test.

@@ -6,7 +6,7 @@
 /*   By: samarkar <samarkar@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/12 20:33:34 by samarkar          #+#    #+#             */
-/*   Updated: 2026/01/19 19:06:28 by samarkar         ###   ########lyon.fr   */
+/*   Updated: 2026/01/21 19:13:05 by samarkar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,5 +16,5 @@
 void	print_error(void)
 {
 	write(2, "Error\n", 6);
-	exit(1);
+	return ;
 }

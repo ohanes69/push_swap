@@ -7,3 +7,4 @@ ARG="0 2 1"; ./a.out $ARG | ./checker_linux $ARG
 ./a.out --bench --simple 5 4 3 2 1 2>bench.txt>/dev/null && cat bench.txt
 shuf -i 1-1000 -n 500 > chiffre.txt ; ./a.out $(cat chiffre.txt) | ./checker_linux $(cat chiffre.txt)
 shuf -i 1-1000 -n 500 > chiffre.txt ; ./a.out $(cat chiffre.txt) | wc -l
+funcheck -c -a ./a.out --bench --medium -5 20 10
