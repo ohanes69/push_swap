@@ -3,18 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   print_error.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lucpelle <lucpelle@student.42.fr>          +#+  +:+       +#+        */
+/*   By: samarkar <samarkar@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/01/12 20:36:10 by samarkar          #+#    #+#             */
-/*   Updated: 2026/01/17 17:30:47 by lucpelle         ###   ########.fr       */
+/*   Created: 2026/01/12 20:33:34 by samarkar          #+#    #+#             */
+/*   Updated: 2026/01/21 19:13:05 by samarkar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
-#include <stdint.h>
 #include <unistd.h>
+#include <stdlib.h>
 
 void	print_error(void)
 {
 	write(2, "Error\n", 6);
+	return ;
 }

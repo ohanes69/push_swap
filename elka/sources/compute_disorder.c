@@ -6,7 +6,7 @@
 /*   By: lucpelle <lucpelle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/19 17:55:26 by samarkar          #+#    #+#             */
-/*   Updated: 2026/01/21 15:31:24 by lucpelle         ###   ########.fr       */
+/*   Updated: 2026/01/22 12:46:21 by lucpelle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,9 @@ float	compute_disorder(t_tab *a)
 	while (i < a->size - 1)
 	{
 		j = i + 1;
-		while (j < a->size - 1)
+		while (j < a->size)
 		{
-			total_pairs += 1;
+			++total_pairs;
 			if (a->tab[i] > a->tab[j])
 				mistakes++;
 			j++;

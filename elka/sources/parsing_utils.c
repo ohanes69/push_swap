@@ -3,54 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lucpelle <lucpelle@student.42.fr>          +#+  +:+       +#+        */
+/*   By: samarkar <samarkar@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/05 20:53:58 by lucpelle          #+#    #+#             */
-/*   Updated: 2026/01/17 19:22:01 by lucpelle         ###   ########.fr       */
+/*   Created: 2026/01/12 20:36:10 by samarkar          #+#    #+#             */
+/*   Updated: 2026/01/15 17:24:33 by samarkar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include <stdlib.h>
 #include <stdint.h>
-
-void	*ft_memcpy(void *dest, const void *src, size_t n)
-{
-	size_t	i;
-
-	if (!dest && !src)
-		return (NULL);
-	i = 0;
-	while (i < n)
-	{
-		((unsigned char *)dest)[i] = ((unsigned char *)src)[i];
-		i++;
-	}
-	return (dest);
-}
-
-size_t	ft_strcmp(char *s1)
-{
-	size_t	i;
-	size_t	j;
-	char	*comp[5];
-
-	comp[0] = "--simple";
-	comp[1] = "--medium";
-	comp[2] = "--complex";
-	comp[3] = "--adaptative";
-	comp[4] = "--bench";
-	j = 0;
-	while (j < 5)
-	{
-		i = 0;
-		while ((s1[i] && comp[j][i]) && s1[i] == comp[j][i])
-			i++;
-		if (s1[i] == '\0' && comp[j][i] == '\0')
-			return (j + 1);
-		++j;
-	}
-	return (0);
-}
 
 long	ft_atoi_long(const char *str)
 {

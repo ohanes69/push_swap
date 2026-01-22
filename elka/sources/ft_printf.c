@@ -3,27 +3,34 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: samarkar <samarkar@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: lucpelle <lucpelle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/14 17:58:08 by lucpelle          #+#    #+#             */
-/*   Updated: 2026/01/19 18:34:02 by samarkar         ###   ########lyon.fr   */
+/*   Updated: 2026/01/22 13:00:38 by lucpelle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "push_swap.h"
 #include <stdarg.h>
 #include <unistd.h>
+#include <limits.h>
 
-void	ft_put_in_buffer(char c, t_buffer *buffer)
+static void	ft_put_in_buffer(char c, t_buffer *buffer)
 {
-	if ((buffer->len) >= BUF_SIZE)
-	{
-		write (2, buffer->str, buffer->len);
-		buffer->len = 0;
-		buffer->total_written += BUF_SIZE;
-	}
 	buffer->str[buffer->len] = c;
 	buffer->len++;
+}
+
+static void	ft_nbr_in_buffer(int nb, t_buffer *buffer)
+{
+	if (nb < 0)
+	{
+		ft_put_in_buffer('-', buffer);
+		nb = -nb;
+	}
+	if (nb >= 10)
+		ft_nbr_in_buffer(nb / 10, buffer);
+	ft_put_in_buffer(nb % 10 + '0', buffer);
 }
 
 static void	check_type(char c, va_list args, t_buffer *buffer)
@@ -34,28 +41,11 @@ static void	check_type(char c, va_list args, t_buffer *buffer)
 		ft_put_in_buffer((char)va_arg(args, int), buffer);
 	else if (c == '%')
 		ft_put_in_buffer('%', buffer);
-	else if (c == 's')
-		ft_str_in_buffer(va_arg(args, char *), buffer);
-	else if (c == 'd' || c == 'i')
+	else if (c == 'd')
 		ft_nbr_in_buffer(va_arg(args, int), buffer);
-	else if (c == 'u')
-		ft_unsigned_in_buffer(va_arg(args, unsigned int), buffer);
-	else if (c == 'X' || c == 'x')
-		ft_hexa(va_arg(args, unsigned int), buffer, c);
-	else if (c == 'p')
-	{
-		ptr = va_arg(args, unsigned long);
-		if (ptr == 0)
-			ft_str_in_buffer("(nil)", buffer);
-		else
-		{
-			ft_str_in_buffer("0x", buffer);
-			ft_print_ptr(ptr, buffer);
-		}
-	}
 }
 
-int	ft_printf(const char *s, ...)
+void	ft_printf(const char *s, ...)
 {
 	va_list		args;
 	t_buffer	buffer;
@@ -63,10 +53,9 @@ int	ft_printf(const char *s, ...)
 
 	i = 0;
 	buffer.len = 0;
-	buffer.total_written = 0;
 	va_start(args, s);
 	if (!s)
-		return (-1);
+		return ;
 	while (s[i])
 	{
 		if (s[i] == '%')
@@ -77,5 +66,5 @@ int	ft_printf(const char *s, ...)
 	}
 	va_end(args);
 	write(2, buffer.str, buffer.len);
-	return (buffer.len + buffer.total_written);
+	return ;
 }

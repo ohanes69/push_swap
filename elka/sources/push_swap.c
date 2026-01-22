@@ -6,7 +6,7 @@
 /*   By: lucpelle <lucpelle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/14 17:31:20 by lucpelle          #+#    #+#             */
-/*   Updated: 2026/01/21 18:57:41 by lucpelle         ###   ########.fr       */
+/*   Updated: 2026/01/22 14:35:21 by lucpelle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,12 +36,23 @@ void	choose_sort(size_t strategy, t_tab *a, t_tab *b, size_t size)
 
 void	if_nothing_to_sort(float metric, size_t is_bench, size_t strategy, t_tab *a)
 {
-	if (metric == 0.000000 && is_bench != 5)
+	if (is_bench != 5)
 		return ;
-	else if (metric == 0.000000 && is_bench == 5)
+	else if (is_bench == 5)
 	{
 		strategy_use(strategy, a, metric);
 		return ;
+	}
+}
+static void	set_tab(size_t i, t_tab *a, char **args, size_t size)
+{
+	size_t	j;
+
+	j = 0;
+	while (j < size)
+	{
+		a->tab[j] = is_valid_int(args[i + j]);
+		++j;
 	}
 }
 
@@ -49,53 +60,70 @@ void	push_swap(char **args, t_tab *a, t_tab *b, size_t size)
 {
 	size_t	strategy;
 	size_t	is_bench;
+	size_t	i;
 	float	metric;
 
 	strategy = 0;
 	is_bench = 0;
+	i = 0;
+	
 	if (args[0][0] == '-' && args[0][1] == '-')
 	{
 		strategy = ft_strcmp(args[0]);
 		if (strategy == 0)
-		{
-			print_error();
 			return ;
-		}
-		else
-			size--;
+		size--;
+		i++;
 	}
 	if (args[1][0] == '-' && args[1][1] == '-')
 	{
 		is_bench = ft_strcmp(args[1]);
-		if (is_bench == 0 || is_bench == strategy)
-		{
-			print_error();
+		if (strategy == 0)
 			return ;
-		}
-		else
-			size--;
+		size--;
+		i++;
 	}
-	a->tab = malloc(sizeof(int) * size);
-	b->tab = malloc(sizeof(int) * size);
-	a->size = size;
-	b->size = 0;
-	if (strategy > is_bench)
+	if (strategy == is_bench && strategy != 0)
+		return ;
+	if (strategy == 5)
 	{
 		int	tmp;
 		tmp = strategy;
 		strategy = is_bench;
 		is_bench = tmp;
 	}
-	set_tab(is_bench, strategy, a, args, size);
-	metric = compute_disorder(a);
-	if (metric == 0.000000)
+	a->size = size;
+	a->tab = malloc(sizeof(int) * size);
+	b->size = 0;
+	b->tab = malloc(sizeof(int) * size);
+	
+	if (!a->tab || !b->tab)
 	{
-		if_nothing_to_sort(metric, is_bench, strategy, a);
+		free(a->tab);
+		free(b->tab);
 		return ;
 	}
-	if (strategy == 0 || strategy == 4)
-		strategy = choose_metric(strategy, metric);
-	choose_sort(strategy, a, b, size);
-	if (is_bench == 5)
-		strategy_use(strategy, a, metric);
+	set_tab(i, a, args, size);
+	metric = compute_disorder(a);
+	__builtin_printf("%f\n", metric);
+	i = 0;
+	medium_sort(a, b, size);
+	while (size > 0)
+	{
+		__builtin_printf("%d\n", a->tab[i]);
+		i++;
+		size--;
+	}
+	// if (metric == 0.000000)
+	// {
+	// 	if_nothing_to_sort(metric, is_bench, strategy, a);
+	// 	return ;
+	// }
+	// if (strategy == 0 || strategy == 4)
+	// 	strategy = choose_metric(strategy, metric);
+	// choose_sort(strategy, a, b, size);
+	// if (is_bench == 5)
+	// 	strategy_use(strategy, a, metric);
+	free(a->tab);
+	free(b->tab);
 }

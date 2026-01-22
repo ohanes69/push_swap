@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   bench.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: samarkar <samarkar@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: lucpelle <lucpelle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/19 14:07:23 by samarkar          #+#    #+#             */
-/*   Updated: 2026/01/20 18:56:58 by samarkar         ###   ########lyon.fr   */
+/*   Updated: 2026/01/22 13:00:56 by lucpelle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-#include "ft_printf.h"
 #include <stdio.h>
 
 static float	ft_mod(float x, int y)

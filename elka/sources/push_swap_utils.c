@@ -1,63 +1,52 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap_functions.c                              :+:      :+:    :+:   */
+/*   push_swap_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lucpelle <lucpelle@student.42.fr>          +#+  +:+       +#+        */
+/*   By: samarkar <samarkar@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/01/15 16:59:21 by samarkar          #+#    #+#             */
-/*   Updated: 2026/01/16 20:10:07 by lucpelle         ###   ########.fr       */
+/*   Created: 2025/11/05 20:53:58 by lucpelle          #+#    #+#             */
+/*   Updated: 2026/01/18 18:11:47 by samarkar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	swap(t_tab *stack, char *str)
-{
-	int	tmp;
-
-	if (stack->size >= 2)
-	{
-		tmp = stack->tab[0];
-		stack->tab[0] = stack->tab[1];
-		stack->tab[1] = tmp;
-		if (str)
-		{
-			write (1, str, 2);
-			write (1, "\n", 1);
-		}
-	}
-}
-
-void	swap_ab(t_tab *a, t_tab *b)
-{
-	swap(a, NULL);
-	swap(b, NULL);
-	write (1, "ss", 2);
-	write (1, "\n", 1);
-}
-
-void	push(t_tab *stack1, t_tab *stack2, char *str)
+void	*ft_memcpy(void *dest, const void *src, size_t n)
 {
 	size_t	i;
 
-	if (stack1->size <= 0)
-		return ;
-	i = stack2->size;
-	while (i > 0)
+	if (!dest && !src)
+		return (NULL);
+	i = 0;
+	while (i < n)
 	{
-		stack2->tab[i] = stack2->tab[i - 1];
-		--i;
+		((unsigned char *)dest)[i] = ((unsigned char *)src)[i];
+		i++;
 	}
-	stack2->tab[0] = stack1->tab[0];
-	stack2->size++;
-	i = 1;
-	while (i < stack1->size)
+	return (dest);
+}
+
+size_t	ft_strcmp(char *s1)
+{
+	size_t	i;
+	size_t	j;
+	char	*comp[5];
+
+	comp[0] = "--simple";
+	comp[1] = "--medium";
+	comp[2] = "--complex";
+	comp[3] = "--adaptative";
+	comp[4] = "--bench";
+	j = 0;
+	while (j < 5)
 	{
-		stack1->tab[i - 1] = stack1->tab[i];
-		++i;
+		i = 0;
+		while ((s1[i] && comp[j][i]) && s1[i] == comp[j][i])
+			i++;
+		if (s1[i] == '\0' && comp[j][i] == '\0')
+			return (j + 1);
+		++j;
 	}
-	stack1->size--;
-	write (1, str, 2);
-	write (1, "\n", 1);
+	return (0);
 }

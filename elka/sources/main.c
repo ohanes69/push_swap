@@ -6,11 +6,12 @@
 /*   By: lucpelle <lucpelle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/15 13:48:46 by samarkar          #+#    #+#             */
-/*   Updated: 2026/01/21 18:32:42 by lucpelle         ###   ########.fr       */
+/*   Updated: 2026/01/22 13:14:20 by lucpelle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+#include <stdio.h>
 
 void	init_stack(t_tab *stack)
 {
@@ -27,7 +28,7 @@ void	init_stack(t_tab *stack)
 	stack->rrr = 0;
 }
 
-static void		free_all(char **args, t_tab *a, t_tab *b)
+static void	free_all(char **args, t_tab *a, t_tab *b)
 {
 	ft_free_tab(args);
 	free(a);
@@ -53,24 +54,22 @@ int	main(int ac, char **av)
 
 	if (ac < 2)
 		return (0);
+	args = NULL;
 	a = malloc(sizeof(t_tab));
 	b = malloc(sizeof(t_tab));
-	init_stack(a);
 	if (!a || !b)
 	{
 		free_all(args, a, b);
-		return (0);
+		return (1);
 	}
+	init_stack(a);
 	args = parsing(ac, av);
 	if (!args)
 	{
 		free_all(args, a, b);
-		return (0);
+		return (1);
 	}
 	size = nb_args(args);
 	push_swap(args, a, b, size);
-	free(a->tab);
-	free(b->tab);
 	free_all(args, a, b);
 }
-
