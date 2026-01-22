@@ -6,7 +6,7 @@
 /*   By: lucpelle <lucpelle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/19 14:07:23 by samarkar          #+#    #+#             */
-/*   Updated: 2026/01/22 13:00:56 by lucpelle         ###   ########.fr       */
+/*   Updated: 2026/01/22 16:02:39 by lucpelle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,11 +76,13 @@ void	strategy_use(size_t strategy, t_tab *a, float metric)
 	print_disorder(metric);
 	ft_printf("\n[bench] ");
 	ft_printf("strategy:");
-	if (strategy == 1)
+	if (metric > 0 && metric < 0.2)
 		ft_printf(" Simple / O(n²)");
-	else if (strategy == 2)
+	else if (metric >= 0.2 && metric < 0.5)
 		ft_printf(" Medium / O(n√n)");
-	else if (strategy == 3)
+	else if(metric >= 0.5)
 		ft_printf(" Complex / O(n log n)");
+	else
+		ft_printf(" None");
 	operations(a);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   indexing.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: samarkar <samarkar@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: lucpelle <lucpelle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/16 18:46:08 by lucpelle          #+#    #+#             */
-/*   Updated: 2026/01/20 18:53:33 by samarkar         ###   ########lyon.fr   */
+/*   Updated: 2026/01/22 15:40:04 by lucpelle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ void	is_duplicate(t_tab *a, size_t size)
 	}
 }
 
-int	find_index(int nb, size_t size, int *buffer)
+static int	find_index(int nb, size_t size, int *buffer)
 {
 	size_t	i;
 	int		pos;

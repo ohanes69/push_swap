@@ -6,7 +6,7 @@
 /*   By: lucpelle <lucpelle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/12 21:52:01 by samarkar          #+#    #+#             */
-/*   Updated: 2026/01/22 14:18:05 by lucpelle         ###   ########.fr       */
+/*   Updated: 2026/01/22 15:40:54 by lucpelle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,6 @@ void	strategy_use(size_t strategy, t_tab *a, float metric);
 
 int		is_valid_int(const char *s);
 void	is_duplicate(t_tab *a, size_t size);
-int		find_index(int nb, size_t size, int *buffer);
 void	indexing(t_tab *a, size_t size);
 
 void	print_error(void);

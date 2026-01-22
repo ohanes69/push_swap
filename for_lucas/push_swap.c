@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: samarkar <samarkar@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: lucpelle <lucpelle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/14 17:31:20 by lucpelle          #+#    #+#             */
-/*   Updated: 2026/01/22 14:50:32 by samarkar         ###   ########lyon.fr   */
+/*   Updated: 2026/01/22 15:37:01 by lucpelle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,30 +65,31 @@ void	push_swap(char **args, t_tab *a, t_tab *b, size_t size)
 		strategy = ft_strcmp(args[0]);
 	is_bench = strategy;
 	size = find_size(args, strategy, size);
-	a->size = size;
-	a->tab = malloc(sizeof(int) * size);
-	if (!a->tab)
-	{
-		free(a->tab);
-		return ;
-	}
-	b->size = 0;
-	strategy = set_tab(strategy, a, args, size);
-	metric = compute_disorder(a);
-	if (metric == 0.000000)
-	{
-		if_nothing_to_sort(metric, is_bench, strategy, a);
-		return ;
-	}
-	if (strategy == 0 || strategy == 4)
-		strategy = choose_metric(strategy, metric);
-	b->tab = malloc(sizeof(int) * size);
-	if (!b->tab)
-	{
-		free(b->tab);
-		return ;
-	}
-	choose_sort(strategy, a, b, size);
-	if (is_bench == 5)
-		strategy_use(strategy, a, metric);
+	__builtin_printf("%zu", size);
+	// a->size = size;
+	// a->tab = malloc(sizeof(int) * size);
+	// if (!a->tab)
+	// {
+	// 	free(a->tab);
+	// 	return ;
+	// }
+	// b->size = 0;
+	// strategy = set_tab(strategy, a, args, size);
+	// metric = compute_disorder(a);
+	// if (metric == 0.000000)
+	// {
+	// 	if_nothing_to_sort(metric, is_bench, strategy, a);
+	// 	return ;
+	// }
+	// if (strategy == 0 || strategy == 4)
+	// 	strategy = choose_metric(strategy, metric);
+	// b->tab = malloc(sizeof(int) * size);
+	// if (!b->tab)
+	// {
+	// 	free(b->tab);
+	// 	return ;
+	// }
+	// choose_sort(strategy, a, b, size);
+	// if (is_bench == 5)
+	// 	strategy_use(strategy, a, metric);
 }
