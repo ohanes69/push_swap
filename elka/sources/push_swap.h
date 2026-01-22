@@ -6,7 +6,7 @@
 /*   By: lucpelle <lucpelle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/12 21:52:01 by samarkar          #+#    #+#             */
-/*   Updated: 2026/01/21 15:50:40 by lucpelle         ###   ########.fr       */
+/*   Updated: 2026/01/21 18:51:48 by lucpelle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,6 @@ typedef struct s_tab
 }	t_tab;
 
 void	strategy_use(size_t strategy, t_tab *a, float metric);
-
-size_t	set_tab(size_t strategy, t_tab *a, char **args, size_t size);
 void	print_error(void);
 
 void	ft_free_tab(char **tab);
@@ -84,5 +82,6 @@ void	strategy_selector(size_t strategy, size_t size, t_tab *a, t_tab *b);
 int		is_valid_int(const char *s);
 void	indexing(t_tab *a, size_t size);
 void	is_duplicate(t_tab *a, size_t size);
+void 	set_tab(size_t is_bench, size_t strategy, t_tab *a, char **args, size_t size);
 
 #endif
