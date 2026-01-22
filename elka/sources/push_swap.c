@@ -6,7 +6,7 @@
 /*   By: lucpelle <lucpelle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/14 17:31:20 by lucpelle          #+#    #+#             */
-/*   Updated: 2026/01/22 16:08:45 by lucpelle         ###   ########.fr       */
+/*   Updated: 2026/01/22 17:36:02 by lucpelle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,21 +47,6 @@ static void	set_tab(size_t i, t_tab *a, char **args, size_t size)
 	is_duplicate(a, size);
 }
 
-void	init_tab(t_tab *a, t_tab *b, size_t size)
-{
-	a->size = size;
-	a->tab = malloc(sizeof(int) * size);
-	b->size = 0;
-	b->tab = malloc(sizeof(int) * size);
-	
-	if (!a->tab || !b->tab)
-	{
-		free(a->tab);
-		free(b->tab);
-		return ;
-	}
-	set_tab(i, a, args, size);
-}
 void	push_swap(char **args, t_tab *a, t_tab *b, size_t size)
 {
 	size_t	strategy;
@@ -98,6 +83,18 @@ void	push_swap(char **args, t_tab *a, t_tab *b, size_t size)
 		strategy = is_bench;
 		is_bench = tmp;
 	}
+	a->size = size;
+	a->tab = malloc(sizeof(int) * size);
+	b->size = 0;
+	b->tab = malloc(sizeof(int) * size);
+	
+	if (!a->tab || !b->tab)
+	{
+		free(a->tab);
+		free(b->tab);
+		return ;
+	}
+	set_tab(i, a, args, size);
 	metric = compute_disorder(a);
 	i = 0;
 	if (metric == 0.000000 && is_bench == 5)
