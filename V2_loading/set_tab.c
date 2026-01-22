@@ -6,7 +6,7 @@
 /*   By: samarkar <samarkar@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/20 18:41:14 by samarkar          #+#    #+#             */
-/*   Updated: 2026/01/20 18:41:44 by samarkar         ###   ########lyon.fr   */
+/*   Updated: 2026/01/21 17:08:50 by samarkar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,6 @@ size_t	bench_strategy(size_t strategy, t_tab *a, char **args, size_t size)
 {
 	size_t	i;
 
-	a->tab = malloc(sizeof(int) * size);
 	i = 1;
 	strategy = ft_strcmp(args[i]);
 	if (strategy >= 1 && strategy <= 4)
@@ -67,7 +66,6 @@ size_t	bench_strategy(size_t strategy, t_tab *a, char **args, size_t size)
 
 size_t	set_tab(size_t strategy, t_tab *a, char **args, size_t size)
 {
-	a->tab = malloc(sizeof(int) * size);
 	if (strategy == 5)
 	{
 		strategy = bench_strategy(strategy, a, args, size);

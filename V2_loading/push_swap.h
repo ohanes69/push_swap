@@ -6,7 +6,7 @@
 /*   By: samarkar <samarkar@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/12 21:52:01 by samarkar          #+#    #+#             */
-/*   Updated: 2026/01/20 18:53:37 by samarkar         ###   ########lyon.fr   */
+/*   Updated: 2026/01/21 16:46:25 by samarkar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ char	**ft_split(char const *s, char c);
 char	*ft_strdup(char const *s1, char set);
 
 size_t	count_args(int argc, char **argv);
-void	fill_args(char **args, char **split, size_t *k);
+char	**fill_args(char **args, char **split, size_t *k);
 char	**parsing(int argc, char **argv);
 
 long	ft_atoi_long(const char *str);
