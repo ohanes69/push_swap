@@ -6,14 +6,14 @@
 /*   By: samarkar <samarkar@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/22 10:09:10 by samarkar          #+#    #+#             */
-/*   Updated: 2026/01/22 17:47:13 by samarkar         ###   ########lyon.fr   */
+/*   Updated: 2026/01/22 21:03:37 by samarkar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 #include <stdio.h>
 
-size_t	check_flags2(char *s)
+size_t	is_flag(char *s)
 {
 	size_t	flags;
 
@@ -31,7 +31,7 @@ size_t	check_flags2(char *s)
 	return (flags);
 }
 
-size_t	check_flags(char **args, t_tab *stack)
+size_t	count_flags(char **args, t_tab *stack)
 {
 	size_t	i;
 	size_t	flags;
@@ -53,7 +53,7 @@ size_t	check_flags(char **args, t_tab *stack)
 		i++;
 	}
 	flags = stack->simple + stack->medium + stack->complex
-	+ stack->adaptative + stack->bench;
+		+ stack->adaptative + stack->bench;
 	if (flags > 2)
 		print_error();
 	return (flags);
@@ -103,7 +103,7 @@ void	if_nothing_to_sort(float metric, size_t is_bench, size_t strategy, t_tab *a
 	}
 }
 
-size_t	return_strategy2(t_tab *stack)
+size_t	strategy_is_5(t_tab *stack)
 {
 	if (stack->simple == 1)
 		return (1);
@@ -131,14 +131,20 @@ size_t	return_strategy(t_tab *stack)
 	return (0);
 }
 
+void	is_same_flags(t_tab	*stack)
+{
+	if (stack->simple > 1 || stack->medium > 1 || stack->complex > 1
+		|| stack->adaptative > 1 || stack->bench > 1)
+		print_error();
+}
+
 void	push_swap(char **args, t_tab *a, t_tab *b, size_t size)
 {
-	t_tab	*stack;
 	size_t	flags;
 	char	**new_stack;
 	size_t	strategy;
-	float 	metric;
 	size_t	is_bench;
+	float 	metric;
 
 	is_bench = 0;
 	a = malloc(sizeof(t_tab));
@@ -147,8 +153,9 @@ void	push_swap(char **args, t_tab *a, t_tab *b, size_t size)
 	b = malloc(sizeof(t_tab));
 	b->size = 0;
 	b->tab = malloc(sizeof(int) * size);
-	stack = malloc(sizeof(t_tab));
-	flags = check_flags(args, stack);
+	flags = count_flags(args, a);
+
+	is_same_flags(a);
 
 	if (flags == 0)
 		set_table(args, a);
@@ -162,11 +169,11 @@ void	push_swap(char **args, t_tab *a, t_tab *b, size_t size)
 
 	metric = compute_disorder(a);
 
-	strategy = return_strategy(stack);
+	strategy = return_strategy(a);
 	if (strategy == 5)
 	{
 		is_bench = 5;
-		strategy = return_strategy2(stack);
+		strategy = strategy_is_5(a);
 	}
 
 	if (metric == 0)

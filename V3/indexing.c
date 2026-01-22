@@ -6,7 +6,7 @@
 /*   By: samarkar <samarkar@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/22 11:18:55 by samarkar          #+#    #+#             */
-/*   Updated: 2026/01/22 17:47:04 by samarkar         ###   ########lyon.fr   */
+/*   Updated: 2026/01/22 20:52:52 by samarkar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #include "push_swap.h"
 #include <stdio.h>
 
-int	is_valid_int2(const char *s)
+int	is_integer(const char *s)
 {
 	size_t	i;
 
@@ -44,9 +44,9 @@ char	**new_tab(char **args, size_t size)
 	i = 0;
 	j = 0;
 	new_tab = malloc(sizeof(char *) * (size + 1));
-	while (i < nb_args(args))
+	while (i < number_of_args(args))
 	{
-		if (check_flags2(args[i]) == 0)
+		if (is_flag(args[i]) == 0)
 		{
 			new_tab[j] = ft_strdup(args[i], '\0');
 			j++;
@@ -55,7 +55,7 @@ char	**new_tab(char **args, size_t size)
 		else
 			i++;
 	}
-	new_tab[size] = NULL;
+	new_tab[j] = NULL;
 	return (new_tab);
 }
 

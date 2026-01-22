@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lucpelle <lucpelle@student.42.fr>          +#+  +:+       +#+        */
+/*   By: samarkar <samarkar@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/12 21:52:01 by samarkar          #+#    #+#             */
-/*   Updated: 2026/01/22 18:29:17 by lucpelle         ###   ########.fr       */
+/*   Updated: 2026/01/22 20:55:28 by samarkar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,20 +46,20 @@ typedef struct s_buffer
 {
 	char	str[BUF_SIZE];
 	int		len;
-	int		total_written;	
+	int		total_written;
 }	t_buffer;
 
-size_t	check_flags2(char *s);
+size_t	is_flag(char *s);
 
 void	ft_printf(const char *s, ...);
 
-size_t	nb_args(char **args);
+size_t	number_of_args(char **args);
 
 char	**new_tab(char **args, size_t size);
 
-int		is_valid_int2(const char *s);
+int		is_integer(const char *s);
 
-size_t	find_size(char **args);
+size_t	find_number_of_int(char **args);
 
 void	strategy_use(size_t strategy, t_tab *a, float metric);
 

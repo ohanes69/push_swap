@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lucpelle <lucpelle@student.42.fr>          +#+  +:+       +#+        */
+/*   By: samarkar <samarkar@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/14 17:58:08 by lucpelle          #+#    #+#             */
-/*   Updated: 2026/01/22 13:00:38 by lucpelle         ###   ########.fr       */
+/*   Updated: 2026/01/22 19:10:38 by samarkar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,6 @@ static void	ft_nbr_in_buffer(int nb, t_buffer *buffer)
 
 static void	check_type(char c, va_list args, t_buffer *buffer)
 {
-	unsigned long	ptr;
-
 	if (c == 'c')
 		ft_put_in_buffer((char)va_arg(args, int), buffer);
 	else if (c == '%')

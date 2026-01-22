@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lucpelle <lucpelle@student.42.fr>          +#+  +:+       +#+        */
+/*   By: samarkar <samarkar@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/22 11:02:56 by samarkar          #+#    #+#             */
-/*   Updated: 2026/01/22 18:38:17 by lucpelle         ###   ########.fr       */
+/*   Updated: 2026/01/22 20:55:28 by samarkar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ static void	free_all(char **args, t_tab *a, t_tab *b)
 	free(b);
 }
 
-size_t	nb_args(char **args)
+size_t	number_of_args(char **args)
 {
 	size_t	i;
 
@@ -50,7 +50,7 @@ size_t	nb_args(char **args)
 	return (i);
 }
 
-size_t	find_size(char **args)
+size_t	find_number_of_int(char **args)
 {
 	size_t	i;
 	size_t	count;
@@ -59,7 +59,7 @@ size_t	find_size(char **args)
 	count = 0;
 	while (args[i])
 	{
-		if (is_valid_int2(args[i]) == 1)
+		if (is_integer(args[i]) == 1)
 			count++;
 		i++;
 	}
@@ -91,9 +91,9 @@ int	main(int ac, char **av)
 		free_all(args, a, b);
 		return (1);
 	}
-	size = find_size(args);
+	size = find_number_of_int(args);
 	push_swap(args, a, b, size);
-	// free(a->tab);
-	// free(b->tab);
-	// free_all(args, a, b);
+	free(a->tab);
+	free(b->tab);
+	free_all(args, a, b);
 }

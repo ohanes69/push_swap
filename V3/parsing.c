@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lucpelle <lucpelle@student.42.fr>          +#+  +:+       +#+        */
+/*   By: samarkar <samarkar@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/06 16:32:02 by samarkar          #+#    #+#             */
-/*   Updated: 2026/01/22 18:45:30 by lucpelle         ###   ########.fr       */
+/*   Updated: 2026/01/22 20:31:34 by samarkar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@ char	**fill_args(char **args, char **split, size_t *k)
 	}
 	return (args);
 }
+
 char	**preparsing(char **args, char **argv, size_t i, size_t *k)
 {
 	char	**split;
@@ -91,7 +92,7 @@ char	**parsing(int argc, char **argv)
 	size_t	total;
 	size_t	i;
 	size_t	k;
-	
+
 	k = 0;
 	total = count_args(argc, argv);
 	if (!total)
@@ -100,12 +101,11 @@ char	**parsing(int argc, char **argv)
 	if (!args)
 		return (NULL);
 	i = 1;
-
 	while (i < (size_t)argc)
 	{
 		args = preparsing(args, argv, i, &k);
 		if (!args)
-        	return (NULL);
+			return (NULL);
 		i++;
 	}
 	return (args);
