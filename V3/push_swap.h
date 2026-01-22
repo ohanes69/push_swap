@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: samarkar <samarkar@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: lucpelle <lucpelle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/12 21:52:01 by samarkar          #+#    #+#             */
-/*   Updated: 2026/01/22 17:48:37 by samarkar         ###   ########lyon.fr   */
+/*   Updated: 2026/01/22 18:29:17 by lucpelle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,10 @@
 
 # include <stdlib.h>
 # include <unistd.h>
+
+# ifndef BUF_SIZE
+#  define BUF_SIZE 1024
+# endif
 
 typedef struct s_tab
 {
@@ -38,7 +42,16 @@ typedef struct s_tab
 	int	rrr;
 }	t_tab;
 
+typedef struct s_buffer
+{
+	char	str[BUF_SIZE];
+	int		len;
+	int		total_written;	
+}	t_buffer;
+
 size_t	check_flags2(char *s);
+
+void	ft_printf(const char *s, ...);
 
 size_t	nb_args(char **args);
 

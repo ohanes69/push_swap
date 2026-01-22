@@ -3,21 +3,46 @@
 /*                                                        :::      ::::::::   */
 /*   complex_sort.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: samarkar <samarkar@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: lucpelle <lucpelle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/06 15:11:27 by lucpelle          #+#    #+#             */
-/*   Updated: 2026/01/19 17:47:50 by samarkar         ###   ########lyon.fr   */
+/*   Updated: 2026/01/22 13:04:53 by lucpelle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 #include <stdlib.h>
 
+static void	radix(t_tab *a, t_tab *b, size_t size, size_t current_bits)
+{
+	size_t	i;
+	
+	i = 0;
+	while (i < size)
+	{
+		if ((a->tab[0] >> current_bits & 1) == 0)
+		{
+			push(a, b, "pb");
+			a->pb++;
+		}
+		else
+		{
+			rotate(a, "ra");
+			a->ra++;
+		}
+		++i;
+	}
+	while (b->size != 0)
+	{
+		push(b, a, "pa");
+		a->pa++;
+	}
+}
+
 void	complex_sort(t_tab *a, t_tab *b, size_t size)
 {
 	size_t	max_bits;
 	size_t	current_bits;
-	size_t	i;
 
 	current_bits = 0;
 	max_bits = 0;
@@ -25,26 +50,7 @@ void	complex_sort(t_tab *a, t_tab *b, size_t size)
 		++max_bits;
 	while (current_bits < max_bits)
 	{
-		i = 0;
-		while (i < size)
-		{
-			if ((a->tab[0] >> current_bits & 1) == 0)
-			{
-				push(a, b, "pb");
-				a->pb++;
-			}
-			else
-			{
-				rotate(a, "ra");
-				a->ra++;
-			}
-			++i;
-		}
-		while (b->size != 0)
-		{
-			push(b, a, "pa");
-			a->pa++;
-		}
+		radix(a, b, size, current_bits);
 		++current_bits;
 	}
 }

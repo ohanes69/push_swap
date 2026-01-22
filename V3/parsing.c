@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: samarkar <samarkar@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: lucpelle <lucpelle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/06 16:32:02 by samarkar          #+#    #+#             */
-/*   Updated: 2026/01/21 16:45:49 by samarkar         ###   ########lyon.fr   */
+/*   Updated: 2026/01/22 18:45:30 by lucpelle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,15 +64,35 @@ char	**fill_args(char **args, char **split, size_t *k)
 	}
 	return (args);
 }
+char	**preparsing(char **args, char **argv, size_t i, size_t *k)
+{
+	char	**split;
+
+	split = ft_split(argv[i], ' ');
+	if (!split)
+	{
+		ft_free_tab(args);
+		print_error();
+		return (NULL);
+	}
+	args = fill_args(args, split, k);
+	if (!args)
+	{
+		ft_free_tab(split);
+		return (NULL);
+	}
+	ft_free_tab(split);
+	return (args);
+}
 
 char	**parsing(int argc, char **argv)
 {
 	char	**args;
-	char	**split;
 	size_t	total;
 	size_t	i;
 	size_t	k;
-
+	
+	k = 0;
 	total = count_args(argc, argv);
 	if (!total)
 		return (NULL);
@@ -80,24 +100,12 @@ char	**parsing(int argc, char **argv)
 	if (!args)
 		return (NULL);
 	i = 1;
-	k = 0;
+
 	while (i < (size_t)argc)
 	{
-		split = ft_split(argv[i], ' ');
-		if (!split)
-		{
-			ft_free_tab(args);
-			print_error();
-			return (NULL);
-		}
-		args = fill_args(args, split, &k);
+		args = preparsing(args, argv, i, &k);
 		if (!args)
-		{
-			ft_free_tab(args);
-			ft_free_tab(split);
-			return (NULL);
-		}
-		ft_free_tab(split);
+        	return (NULL);
 		i++;
 	}
 	return (args);

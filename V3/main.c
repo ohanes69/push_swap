@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: samarkar <samarkar@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: lucpelle <lucpelle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/22 11:02:56 by samarkar          #+#    #+#             */
-/*   Updated: 2026/01/22 17:46:55 by samarkar         ###   ########lyon.fr   */
+/*   Updated: 2026/01/22 18:38:17 by lucpelle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,20 +75,15 @@ int	main(int ac, char **av)
 
 	if (ac < 2)
 		return (0);
+	args = NULL;
 	a = malloc(sizeof(t_tab));
-	if (!a)
-	{
-		free(a);
-		return (1);
-	}
 	b = malloc(sizeof(t_tab));
-	if (!b)
+	if (!a || !b)
 	{
 		free(a);
 		free(b);
 		return (1);
 	}
-	args = NULL;
 	init_stack(a);
 	args = parsing(ac, av);
 	if (!args)
