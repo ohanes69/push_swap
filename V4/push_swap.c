@@ -6,7 +6,7 @@
 /*   By: samarkar <samarkar@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/22 10:09:10 by samarkar          #+#    #+#             */
-/*   Updated: 2026/01/23 20:23:46 by samarkar         ###   ########lyon.fr   */
+/*   Updated: 2026/01/23 20:27:12 by samarkar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -154,7 +154,6 @@ void	if_bench_flag(size_t strategy, size_t size, t_tab *a, t_tab *b)
 	float	metric;
 
 	metric = compute_disorder(a);
-
 	if (strategy == 0 || strategy == 4)
 		strategy = choose_metric(strategy, metric);
 	choose_sort(strategy, a, b, size);

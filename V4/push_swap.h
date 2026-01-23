@@ -6,7 +6,7 @@
 /*   By: samarkar <samarkar@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/12 21:52:01 by samarkar          #+#    #+#             */
-/*   Updated: 2026/01/23 14:57:32 by samarkar         ###   ########lyon.fr   */
+/*   Updated: 2026/01/23 20:40:36 by samarkar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,13 +49,13 @@ typedef struct s_buffer
 	int		total_written;
 }	t_buffer;
 
+void	free_all(char **args, t_tab *a, t_tab *b);
+
 size_t	is_flag(char *s);
 
 void	ft_printf(const char *s, ...);
 
 size_t	number_of_args(char **args);
-
-char	**new_tab(char **args, size_t size);
 
 int		is_integer(const char *s);
 
@@ -70,7 +70,7 @@ void	is_duplicate(t_tab *a, size_t size);
 int		find_index(int nb, size_t size, int *buffer);
 void	indexing(t_tab *a, size_t size);
 
-void	print_error(void);
+void	print_error();
 
 void	ft_free_tab(char **tab);
 char	**ft_split(char const *s, char c);

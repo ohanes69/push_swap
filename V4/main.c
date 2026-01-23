@@ -6,7 +6,7 @@
 /*   By: samarkar <samarkar@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/22 11:02:56 by samarkar          #+#    #+#             */
-/*   Updated: 2026/01/23 17:40:49 by samarkar         ###   ########lyon.fr   */
+/*   Updated: 2026/01/23 20:34:51 by samarkar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	init_stack(t_tab *stack)
 	stack->rrr = 0;
 }
 
-static void	free_all(char **args, t_tab *a, t_tab *b)
+void	free_all(char **args, t_tab *a, t_tab *b)
 {
 	ft_free_tab(args);
 	free(a);
