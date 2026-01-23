@@ -6,7 +6,7 @@
 /*   By: samarkar <samarkar@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/22 11:18:55 by samarkar          #+#    #+#             */
-/*   Updated: 2026/01/22 20:52:52 by samarkar         ###   ########lyon.fr   */
+/*   Updated: 2026/01/23 15:59:49 by samarkar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,11 +44,21 @@ char	**new_tab(char **args, size_t size)
 	i = 0;
 	j = 0;
 	new_tab = malloc(sizeof(char *) * (size + 1));
+	if (!new_tab)
+	{
+		free(new_tab);
+		return (NULL);
+	}
 	while (i < number_of_args(args))
 	{
 		if (is_flag(args[i]) == 0)
 		{
 			new_tab[j] = ft_strdup(args[i], '\0');
+			if (!new_tab[j])
+			{
+				ft_free_tab(new_tab);
+				return (NULL);
+			}
 			j++;
 			i++;
 		}

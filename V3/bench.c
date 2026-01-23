@@ -3,48 +3,28 @@
 /*                                                        :::      ::::::::   */
 /*   bench.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lucpelle <lucpelle@student.42.fr>          +#+  +:+       +#+        */
+/*   By: samarkar <samarkar@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/19 14:07:23 by samarkar          #+#    #+#             */
-/*   Updated: 2026/01/22 18:30:19 by lucpelle         ###   ########.fr       */
+/*   Updated: 2026/01/23 14:57:28 by samarkar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 #include <stdio.h>
 
-static float	ft_mod(float x, int y)
-{
-	float	left_nb;
-
-	left_nb = x - (float)((int)(x / y)*y);
-	return (left_nb);
-}
-
 static void	print_disorder(float disorder)
 {
-	char	i;
+	int	temp;
 
-	i = 0;
 	ft_printf("[bench] ");
 	ft_printf("disorder: ");
-	i = ft_mod(disorder, 10) + '0';
-	if (i != '0')
-		ft_printf("%c", i);
-	disorder = disorder * 10;
-	i = ft_mod(disorder, 10) + '0';
-	ft_printf("%c", i);
-	disorder = disorder * 10;
-	i = ft_mod(disorder, 10) + '0';
-	ft_printf("%c", i);
-	disorder = disorder * 10;
+	temp = disorder * 100;
+	ft_printf("%d", temp);
 	ft_printf(".");
-	i = ft_mod(disorder, 10) + '0';
-	ft_printf("%c", i);
-	disorder = disorder * 10;
-	i = ft_mod(disorder, 10) + '0';
-	ft_printf("%c", i);
-	disorder = disorder * 10;
+	temp = disorder * 1000;
+	temp = temp % 100;
+	ft_printf("%d", temp);
 	ft_printf("%%");
 }
 

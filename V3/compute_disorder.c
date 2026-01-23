@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   compute_disorder.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lucpelle <lucpelle@student.42.fr>          +#+  +:+       +#+        */
+/*   By: samarkar <samarkar@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/19 17:55:26 by samarkar          #+#    #+#             */
-/*   Updated: 2026/01/22 12:46:21 by lucpelle         ###   ########.fr       */
+/*   Updated: 2026/01/23 13:37:21 by samarkar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ float	compute_disorder(t_tab *a)
 	total_pairs = 0;
 	mistakes = 0;
 	i = 0;
+	if (a->size == 1)
+		return (0);
 	while (i < a->size - 1)
 	{
 		j = i + 1;

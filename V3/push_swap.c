@@ -6,7 +6,7 @@
 /*   By: samarkar <samarkar@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/22 10:09:10 by samarkar          #+#    #+#             */
-/*   Updated: 2026/01/22 21:26:50 by samarkar         ###   ########lyon.fr   */
+/*   Updated: 2026/01/23 16:48:17 by samarkar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,13 +47,13 @@ size_t	count_flags(char **args, t_tab *stack)
 		if (ft_strcmp(args[i]) == 3)
 			stack->complex++;
 		if (ft_strcmp(args[i]) == 4)
-			stack->adaptative++;
+			stack->adaptive++;
 		if (ft_strcmp(args[i]) == 5)
 			stack->bench++;
 		i++;
 	}
 	flags = stack->simple + stack->medium + stack->complex
-		+ stack->adaptative + stack->bench;
+		+ stack->adaptive + stack->bench;
 	if (flags > 2)
 		print_error();
 	return (flags);
@@ -111,7 +111,7 @@ size_t	strategy_is_5(t_tab *stack)
 		return (2);
 	if (stack->complex == 1)
 		return (3);
-	if (stack->adaptative == 1)
+	if (stack->adaptive == 1)
 		return (4);
 	return (0);
 }
@@ -126,7 +126,7 @@ size_t	return_strategy(t_tab *stack)
 		return (2);
 	if (stack->complex == 1)
 		return (3);
-	if (stack->adaptative == 1)
+	if (stack->adaptive == 1)
 		return (4);
 	return (0);
 }
@@ -134,65 +134,106 @@ size_t	return_strategy(t_tab *stack)
 void	is_same_flags(t_tab	*stack)
 {
 	if (stack->simple > 1 || stack->medium > 1 || stack->complex > 1
-		|| stack->adaptative > 1 || stack->bench > 1)
+		|| stack->adaptive > 1 || stack->bench > 1)
 		print_error();
 }
 
-void	push_swap(char **args, t_tab *a, t_tab *b, size_t size)
+void	set_tab_and_indexing(t_tab *a, char **args, size_t size)
 {
 	size_t	flags;
 	char	**new_stack;
-	size_t	strategy;
-	size_t	is_bench;
-	float 	metric;
 
-	is_bench = 0;
-	a = malloc(sizeof(t_tab));
-	a->size = size;
-	a->tab = malloc(sizeof(int) * size);
-	b = malloc(sizeof(t_tab));
-	b->size = 0;
-	b->tab = malloc(sizeof(int) * size);
+	new_stack = malloc(sizeof(char *) * (size + 1));
+	if (!new_stack)
+	{
+		free(new_stack);
+		return ;
+	}
 	flags = count_flags(args, a);
-
 	is_same_flags(a);
-
 	if (flags == 0)
 		set_table(args, a);
 	else
 	{
 		new_stack = new_tab(args, size);
+		if (!new_stack)
+		{
+			free(new_stack);
+			return ;
+		}
 		set_table(new_stack, a);
 	}
+	free(new_stack);
 	indexing(a, size);
 	is_duplicate(a, size);
+}
+
+void	check_metric(t_tab *a, size_t is_bench, size_t strategy)
+{
+	float	metric;
+
+	metric = compute_disorder(a);
+	if (metric == 0)
+		if_nothing_to_sort(metric, is_bench, strategy, a);
+}
+
+void	if_bench_flag(size_t strategy, size_t size, t_tab *a, t_tab *b)
+{
+	float	metric;
 
 	metric = compute_disorder(a);
 
-	strategy = return_strategy(a);
-	if (strategy == 5)
-	{
-		is_bench = 5;
-		strategy = strategy_is_5(a);
-	}
+	if (strategy == 0 || strategy == 4)
+		strategy = choose_metric(strategy, metric);
+	choose_sort(strategy, a, b, size);
+	strategy_use(strategy, a, metric);
+}
 
-	if (metric == 0)
-	{
-		if_nothing_to_sort(metric, is_bench, strategy, a);
-		return ;
-	}
-	if (is_bench == 5)
-	{
-		if (strategy == 0 || strategy == 4)
-			strategy = choose_metric(strategy, metric);
-		choose_sort(strategy, a, b, size);
-		strategy_use(strategy, a, metric);
-	}
-	else if (strategy >= 1 && strategy <= 3)
+void	if_no_bench_flag(size_t strategy, size_t size, t_tab *a, t_tab *b)
+{
+	float	metric;
+
+	metric = compute_disorder(a);
+	if (strategy >= 1 && strategy <= 3)
 		choose_sort(strategy, a, b, size);
 	else if (strategy == 0 || strategy == 4)
 	{
 		strategy = choose_metric(strategy, metric);
 		choose_sort(strategy, a, b, size);
 	}
+}
+
+void	push_swap(char **args, t_tab *a, t_tab *b, size_t size)
+{
+	size_t	strategy;
+	size_t	is_bench;
+	float	metric;
+
+	is_bench = 0;
+	a->size = size;
+	a->tab = malloc(sizeof(int) * size);
+	b->size = 0;
+	b->tab = malloc(sizeof(int) * size);
+	metric = compute_disorder(a);
+	if (!a->tab || !a->tab)
+	{
+		free(a->tab);
+		free(b->tab);
+		return ;
+	}
+	set_tab_and_indexing(a, args, size);
+	strategy = return_strategy(a);
+	if (strategy == 5)
+	{
+		is_bench = 5;
+		strategy = strategy_is_5(a);
+	}
+	if (metric == 0)
+		check_metric(a, is_bench, strategy);
+	if (is_bench == 5)
+		if_bench_flag(strategy, size, a, b);
+	else
+		if_no_bench_flag(strategy, size, a, b);
+	free(a->tab);
+	free(b->tab);
 }

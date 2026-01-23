@@ -6,7 +6,7 @@
 /*   By: samarkar <samarkar@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/22 11:02:56 by samarkar          #+#    #+#             */
-/*   Updated: 2026/01/22 20:55:28 by samarkar         ###   ########lyon.fr   */
+/*   Updated: 2026/01/23 16:44:35 by samarkar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	init_stack(t_tab *stack)
 	stack->simple = 0;
 	stack->medium = 0;
 	stack->complex = 0;
-	stack->adaptative = 0;
+	stack->adaptive = 0;
 	stack->bench = 0;
 	stack->sa = 0;
 	stack->sb = 0;
@@ -73,7 +73,7 @@ int	main(int ac, char **av)
 	char	**args;
 	size_t	size;
 
-	if (ac < 2)
+	if (ac <= 2)
 		return (0);
 	args = NULL;
 	a = malloc(sizeof(t_tab));
@@ -93,7 +93,5 @@ int	main(int ac, char **av)
 	}
 	size = find_number_of_int(args);
 	push_swap(args, a, b, size);
-	free(a->tab);
-	free(b->tab);
 	free_all(args, a, b);
 }

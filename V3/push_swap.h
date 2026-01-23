@@ -6,7 +6,7 @@
 /*   By: samarkar <samarkar@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/12 21:52:01 by samarkar          #+#    #+#             */
-/*   Updated: 2026/01/22 20:55:28 by samarkar         ###   ########lyon.fr   */
+/*   Updated: 2026/01/23 14:57:32 by samarkar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ typedef struct s_tab
 	size_t	simple;
 	size_t	medium;
 	size_t	complex;
-	size_t	adaptative;
+	size_t	adaptive;
 	size_t	bench;
 	int	sa;
 	int	sb;

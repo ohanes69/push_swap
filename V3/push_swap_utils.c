@@ -6,7 +6,7 @@
 /*   By: samarkar <samarkar@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/05 20:53:58 by lucpelle          #+#    #+#             */
-/*   Updated: 2026/01/18 18:11:47 by samarkar         ###   ########lyon.fr   */
+/*   Updated: 2026/01/23 13:35:37 by samarkar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ size_t	ft_strcmp(char *s1)
 	comp[0] = "--simple";
 	comp[1] = "--medium";
 	comp[2] = "--complex";
-	comp[3] = "--adaptative";
+	comp[3] = "--adaptive";
 	comp[4] = "--bench";
 	j = 0;
 	while (j < 5)
