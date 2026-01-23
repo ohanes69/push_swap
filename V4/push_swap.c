@@ -6,7 +6,7 @@
 /*   By: samarkar <samarkar@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/22 10:09:10 by samarkar          #+#    #+#             */
-/*   Updated: 2026/01/23 20:27:12 by samarkar         ###   ########lyon.fr   */
+/*   Updated: 2026/01/23 20:53:16 by samarkar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,17 +17,7 @@ size_t	is_flag(char *s)
 {
 	size_t	flags;
 
-	flags = 0;
-	if (ft_strcmp(s) == 1)
-		flags++;
-	if (ft_strcmp(s) == 2)
-		flags++;
-	if (ft_strcmp(s) == 3)
-		flags++;
-	if (ft_strcmp(s) == 4)
-		flags++;
-	if (ft_strcmp(s) == 5)
-		flags++;
+	flags = ft_strcmp(s);
 	return (flags);
 }
 
