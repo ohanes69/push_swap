@@ -6,7 +6,7 @@
 /*   By: samarkar <samarkar@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/22 10:09:10 by samarkar          #+#    #+#             */
-/*   Updated: 2026/01/23 19:56:11 by samarkar         ###   ########lyon.fr   */
+/*   Updated: 2026/01/23 20:23:46 by samarkar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -143,7 +143,7 @@ void	is_same_flags(t_tab	*stack)
 
 void	set_tab_and_indexing(t_tab *a, char **args, size_t size)
 {
-	is_same_flags(a); // regarde si il y a deux fois le meme flag
+	is_same_flags(a);
 	set_table(args, a);
 	indexing(a, size);
 	is_duplicate(a, size);
@@ -154,6 +154,7 @@ void	if_bench_flag(size_t strategy, size_t size, t_tab *a, t_tab *b)
 	float	metric;
 
 	metric = compute_disorder(a);
+
 	if (strategy == 0 || strategy == 4)
 		strategy = choose_metric(strategy, metric);
 	choose_sort(strategy, a, b, size);
@@ -191,24 +192,24 @@ void	push_swap(char **args, t_tab *a, t_tab *b, size_t size)
 		free(b->tab);
 		return ;
 	}
-	count_flags(args, a); // count nombre de flags et increment a->flags(simple, medium ect...)
-	set_tab_and_indexing(a, args, size); // set -5 20 10 ; ignore les flags et si argv no valid int print_error
-	metric = compute_disorder(a); // calcule la metric
-	strategy = return_strategy(a); // retourne entre 0 et 5 en fonction du flag et si flag ou pas
+	count_flags(args, a);
+	set_tab_and_indexing(a, args, size);
+	metric = compute_disorder(a);
+	strategy = return_strategy(a);
 	if (strategy == 5)
 	{
 		is_bench = 5;
-		strategy = strategy_is_5(a); // si --bench present retourne entre 0 et 4
+		strategy = strategy_is_5(a);
 	}
 	if (metric == 0)
 	{
-		if_nothing_to_sort(metric, is_bench, strategy, a); // retourne bench avec 0.0% ou rien du tout
+		if_nothing_to_sort(metric, is_bench, strategy, a);
 		return ;
 	}
 	if (is_bench == 5)
-		if_bench_flag(strategy, size, a, b); // retourne le resultat avec le bench
+		if_bench_flag(strategy, size, a, b);
 	else
-		if_no_bench_flag(strategy, size, a, b); // retourne le resultat sans le bench
+		if_no_bench_flag(strategy, size, a, b);
 	free(a->tab);
 	free(b->tab);
 }
