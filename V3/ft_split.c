@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: samarkar <samarkar@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: lucpelle <lucpelle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/19 17:55:45 by samarkar          #+#    #+#             */
-/*   Updated: 2026/01/19 17:55:48 by samarkar         ###   ########lyon.fr   */
+/*   Updated: 2026/01/24 03:05:25 by lucpelle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
+#include "push_swap.h"
 
 static size_t	ft_count_words(const char *s, char c)
 {
@@ -38,7 +39,7 @@ static size_t	is_charset(char c, char set)
 	return (1);
 }
 
-char	*ft_strdup(char const *s1, char set)
+char	*ft_strdup2(char const *s1, char set)
 {
 	size_t		i;
 	size_t		len;
@@ -79,22 +80,21 @@ void	ft_free_tab(char **tab)
 	tab = NULL;
 }
 
-char	**ft_split(char const *s, char c)
+char	**ft_split(char const *s, char c, t_data *data)
 {
 	char		**tab;
 	size_t		i;
-	size_t		len;
 
-	len = ft_count_words(s, c);
-	tab = malloc(sizeof(char *) * (len + 1));
+	data->size = ft_count_words(s, c);
+	tab = malloc(sizeof(char *) * (data->size + 1));
 	if (!tab)
 		return (NULL);
 	i = 0;
-	while (i < len)
+	while (i < data->size)
 	{
 		while (*s != '\0' && is_charset(*s, c) == 0)
 			s++;
-		tab[i] = ft_strdup(s, c);
+		tab[i] = ft_strdup2(s, c);
 		if (!tab[i])
 		{
 			ft_free_tab(tab);

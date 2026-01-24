@@ -3,23 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: samarkar <samarkar@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: lucpelle <lucpelle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/22 11:02:56 by samarkar          #+#    #+#             */
-/*   Updated: 2026/01/23 16:44:35 by samarkar         ###   ########lyon.fr   */
+/*   Updated: 2026/01/24 03:07:04 by lucpelle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 #include <stdio.h>
 
-void	init_stack(t_tab *stack)
+void	init_stack(t_strategy *stack)
 {
-	stack->simple = 0;
-	stack->medium = 0;
-	stack->complex = 0;
-	stack->adaptive = 0;
-	stack->bench = 0;
 	stack->sa = 0;
 	stack->sb = 0;
 	stack->ss = 0;
@@ -33,65 +28,41 @@ void	init_stack(t_tab *stack)
 	stack->rrr = 0;
 }
 
-static void	free_all(char **args, t_tab *a, t_tab *b)
+static void	free_all(t_tab *tab, t_strategy *strategy, t_data *data)
 {
-	ft_free_tab(args);
-	free(a);
-	free(b);
-}
-
-size_t	number_of_args(char **args)
-{
-	size_t	i;
-
-	i = 0;
-	while (args[i])
-		i++;
-	return (i);
-}
-
-size_t	find_number_of_int(char **args)
-{
-	size_t	i;
-	size_t	count;
-
-	i = 0;
-	count = 0;
-	while (args[i])
-	{
-		if (is_integer(args[i]) == 1)
-			count++;
-		i++;
-	}
-	return (count);
+	if (tab)
+		free(tab);
+	if (strategy)
+		free(strategy);
+	if (data)
+		free(data);
 }
 
 int	main(int ac, char **av)
 {
-	t_tab	*a;
-	t_tab	*b;
-	char	**args;
-	size_t	size;
+	t_tab		*tab;
+	t_strategy 	*strategy;
+	t_data 		*data;
 
 	if (ac <= 2)
 		return (0);
-	args = NULL;
-	a = malloc(sizeof(t_tab));
-	b = malloc(sizeof(t_tab));
-	if (!a || !b)
+	tab = malloc(sizeof(t_tab));
+	strategy = malloc(sizeof(t_strategy));
+	data = malloc(sizeof(t_data));
+	if (!tab || !strategy || !data)
 	{
-		free(a);
-		free(b);
+		free_all(tab, strategy, data);
 		return (1);
 	}
-	init_stack(a);
-	args = parsing(ac, av);
-	if (!args)
+	init_stack(strategy);
+	tab = parsing(ac, av, tab, data);
+	size_t i = 0;
+	while (i < ac - 1)
 	{
-		free_all(args, a, b);
-		return (1);
+		printf("%d", tab->a[i]);
+		++i;
 	}
-	size = find_number_of_int(args);
-	push_swap(args, a, b, size);
-	free_all(args, a, b);
+	
+	// push_swap(args, a, b, size);
+	// free_all(tab, strategy, data);
 }

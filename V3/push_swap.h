@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: samarkar <samarkar@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: lucpelle <lucpelle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/12 21:52:01 by samarkar          #+#    #+#             */
-/*   Updated: 2026/01/23 14:57:32 by samarkar         ###   ########lyon.fr   */
+/*   Updated: 2026/01/24 03:05:36 by lucpelle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,13 +22,31 @@
 
 typedef struct s_tab
 {
-	int		*tab;
+	int		*a;
+	size_t	size_a;
+	int		*b;
+	size_t	size_b;
+}	t_tab;
+
+typedef struct s_buffer
+{
+	char	str[BUF_SIZE];
+	int		len;
+}	t_buffer;
+
+typedef struct s_data
+{
 	size_t	size;
-	size_t	simple;
-	size_t	medium;
-	size_t	complex;
-	size_t	adaptive;
+	size_t	strategy;
 	size_t	bench;
+	size_t	flag1;
+	size_t	flag2;
+	size_t	nb_flag;
+	int		value;
+}	t_data;
+
+typedef struct s_strategy
+{
 	int	sa;
 	int	sb;
 	int	ss;
@@ -40,16 +58,8 @@ typedef struct s_tab
 	int	rra;
 	int	rrb;
 	int	rrr;
-}	t_tab;
+}	t_strategy;
 
-typedef struct s_buffer
-{
-	char	str[BUF_SIZE];
-	int		len;
-	int		total_written;
-}	t_buffer;
-
-size_t	is_flag(char *s);
 
 void	ft_printf(const char *s, ...);
 
@@ -65,7 +75,6 @@ void	strategy_use(size_t strategy, t_tab *a, float metric);
 
 void	set_table(char **args, t_tab *a);
 
-int		is_valid_int(const char *s);
 void	is_duplicate(t_tab *a, size_t size);
 int		find_index(int nb, size_t size, int *buffer);
 void	indexing(t_tab *a, size_t size);
@@ -73,12 +82,11 @@ void	indexing(t_tab *a, size_t size);
 void	print_error(void);
 
 void	ft_free_tab(char **tab);
-char	**ft_split(char const *s, char c);
-char	*ft_strdup(char const *s1, char set);
+char	**ft_split(char const *s, char c, t_data *data);
 
 size_t	count_args(int argc, char **argv);
 char	**fill_args(char **args, char **split, size_t *k);
-char	**parsing(int argc, char **argv);
+t_tab	*parsing(int argc, char **argv, t_tab *tab, t_data *data);
 
 long	ft_atoi_long(const char *str);
 void	*ft_calloc(size_t count, size_t size);
@@ -87,6 +95,8 @@ void    push_swap(char **args, t_tab *a, t_tab *b, size_t size);
 
 void	*ft_memcpy(void *dest, const void *src, size_t n);
 size_t	ft_strcmp(char *s1);
+char	*ft_strdup(const char *s1);
+char	*ft_strdup2(char const *s1, char set);
 
 void	rotate(t_tab *stack, char *str);
 void    rotate_ab(t_tab *a, t_tab *b);
