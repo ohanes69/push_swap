@@ -6,7 +6,7 @@
 /*   By: samarkar <samarkar@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/19 14:07:23 by samarkar          #+#    #+#             */
-/*   Updated: 2026/01/24 15:25:17 by samarkar         ###   ########lyon.fr   */
+/*   Updated: 2026/01/25 16:50:35 by samarkar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,16 +51,16 @@ static void	operations(t_strategy *strategy)
 	ft_printf("rrr: %d\n", strategy->rrr);
 }
 
-void	strategy_use(size_t s, t_strategy *strategy, float metric)
+void	strategy_use(t_data *data, t_strategy *strategy, float metric)
 {
 	print_disorder(metric);
 	ft_printf("\n[bench] ");
 	ft_printf("strategy:");
-	if (s == 1)
+	if (data->flag1 == 1)
 		ft_printf(" Simple / O(n²)");
-	else if (s == 2)
+	else if (data->flag1 == 2)
 		ft_printf(" Medium / O(n√n)");
-	else if (s == 3)
+	else if (data->flag1 == 3)
 		ft_printf(" Complex / O(n log n)");
 	operations(strategy);
 }

@@ -6,7 +6,7 @@
 /*   By: samarkar <samarkar@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/22 11:02:56 by samarkar          #+#    #+#             */
-/*   Updated: 2026/01/25 02:40:27 by samarkar         ###   ########lyon.fr   */
+/*   Updated: 2026/01/25 17:13:00 by samarkar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,5 +57,5 @@ int	main(int ac, char **av)
 	init_stack(strategy);
 	tab = parsing(ac, av, tab, data);
 	push_swap(tab, strategy, data);
-	// free_all(tab, strategy, data);
+	free_all(tab, strategy, data);
 }

@@ -6,7 +6,7 @@
 /*   By: samarkar <samarkar@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/12 21:52:01 by samarkar          #+#    #+#             */
-/*   Updated: 2026/01/25 03:35:37 by samarkar         ###   ########lyon.fr   */
+/*   Updated: 2026/01/25 17:05:21 by samarkar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ char	**new_tab(char **args, size_t size);
 
 size_t	find_number_of_int(char **args);
 
-void	strategy_use(size_t s, t_strategy *strategy, float metric);
+void	strategy_use(t_data *data, t_strategy *strategy, float metric);
 
 void	set_table(char **args, t_tab *a);
 
