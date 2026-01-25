@@ -6,7 +6,7 @@
 /*   By: samarkar <samarkar@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/12 21:52:01 by samarkar          #+#    #+#             */
-/*   Updated: 2026/01/24 19:43:45 by samarkar         ###   ########lyon.fr   */
+/*   Updated: 2026/01/25 03:35:37 by samarkar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,8 +112,8 @@ void	reverse_rotate_b(t_tab *tab);
 float   compute_disorder(t_tab *a);
 
 void	simple_sort(t_tab *tab, t_strategy *strategy);
-void	medium_sort(t_tab *tab, t_strategy *strategy);
-void	complex_sort(t_tab *a, t_tab *b, size_t size);
+void	medium_sort(t_tab *tab, t_strategy *strategy, size_t size);
+void	complex_sort(t_tab *tab, t_strategy *strategy, size_t size);
 
 size_t	find_range_chunk(size_t n);
 size_t	find_numbers_chunks(size_t tab_size, size_t chunk_range);

@@ -6,7 +6,7 @@
 /*   By: samarkar <samarkar@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/22 10:09:10 by samarkar          #+#    #+#             */
-/*   Updated: 2026/01/24 19:02:04 by samarkar         ###   ########lyon.fr   */
+/*   Updated: 2026/01/25 04:05:09 by samarkar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,15 +29,9 @@ void	choose_sort(size_t s, t_tab *tab, t_strategy *strategy)
 	if (s == 1)
 		simple_sort(tab, strategy);
 	else if (s == 2)
-		medium_sort(tab, strategy);
-	s = 0;
-	while (s < tab->size_a)
-	{
-		printf("%d\n", tab->a[s]);
-		s++;
-	}
-	// else if (strategy == 3)
-	// 	complex_sort(a, b, size);
+		medium_sort(tab, strategy, tab->size_a);
+	else if (s == 3)
+		complex_sort(tab, strategy, tab->size_a);
 }
 
 void	if_bench_flag(size_t s, t_tab *tab, t_strategy *strategy)
@@ -51,19 +45,19 @@ void	if_bench_flag(size_t s, t_tab *tab, t_strategy *strategy)
 	strategy_use(s, strategy, metric);
 }
 
-// void	if_no_bench_flag(size_t strategy, size_t size, t_tab *a, t_tab *b)
-// {
-// 	float	metric;
+void	if_no_bench_flag(size_t s, t_tab *tab, t_strategy *strategy)
+{
+	float	metric;
 
-// 	metric = compute_disorder(a);
-// 	if (strategy >= 1 && strategy <= 3)
-// 		choose_sort(strategy, a, b, size);
-// 	else if (strategy == 0 || strategy == 4)
-// 	{
-// 		strategy = choose_metric(strategy, metric);
-// 		choose_sort(strategy, a, b, size);
-// 	}
-// }
+	metric = compute_disorder(tab);
+	if (s >= 1 && s <= 3)
+		choose_sort(s, tab, strategy);
+	else if (s == 0 || s == 4)
+	{
+		s = choose_metric(s, metric);
+		choose_sort(s, tab, strategy);
+	}
+}
 
 size_t	strategy_is_5(t_data *data)
 {
@@ -82,6 +76,7 @@ void	if_nothing_to_sort(size_t is_bench, size_t s, t_strategy *strategy, float m
 void	push_swap(t_tab *tab, t_strategy *strategy, t_data *data)
 {
 	size_t	is_bench;
+	size_t	s;
 	float	metric;
 
 	is_bench = 0;
@@ -96,25 +91,23 @@ void	push_swap(t_tab *tab, t_strategy *strategy, t_data *data)
 	}
 	indexing(tab);
 	metric = compute_disorder(tab);
-
-	size_t s = 0;
-
-	if (data->flag1 == 5 || data->flag2 == 5)
+	s = 0;
+	if (data->flag2 == 5)
 	{
 		is_bench = 5;
-		s = strategy_is_5(data);
+		s = data->flag1;
 	}
-
+	else
+		s = data->flag1;
 	if (metric == 0)
 	{
 		if_nothing_to_sort(is_bench, s, strategy, metric);
 		return ;
 	}
-
 	if (is_bench == 5)
 		if_bench_flag(s, tab, strategy);
-	// else
-	// 	if_no_bench_flag(s, tab);
-	// free(a->tab);
-	// free(b->tab);
+	else
+		if_no_bench_flag(s, tab, strategy);
+	free(tab->a);
+	free(tab->b);
 }

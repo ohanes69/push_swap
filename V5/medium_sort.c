@@ -6,7 +6,7 @@
 /*   By: samarkar <samarkar@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/12 20:18:46 by samarkar          #+#    #+#             */
-/*   Updated: 2026/01/24 19:53:04 by samarkar         ###   ########lyon.fr   */
+/*   Updated: 2026/01/25 03:35:28 by samarkar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ static void	push_chunk_to_b(t_tab *tab, t_strategy *strategy, size_t low, size_t
 	}
 }
 
-void	medium_sort(t_tab *tab, t_strategy *strategy)
+void	medium_sort(t_tab *tab, t_strategy *strategy, size_t size)
 {
 	size_t	chunk_range;
 	size_t	nb_chunks;
@@ -101,13 +101,13 @@ void	medium_sort(t_tab *tab, t_strategy *strategy)
 	size_t	low;
 	size_t	high;
 
-	chunk_range = find_range_chunk(tab->size_a);
-	nb_chunks = find_numbers_chunks(tab->size_a, chunk_range);
+	chunk_range = find_range_chunk(size);
+	nb_chunks = find_numbers_chunks(size, chunk_range);
 	chunk_pos = 0;
 	while (chunk_pos < nb_chunks)
 	{
 		low = chunk_pos * chunk_range;
-		high = find_high_chunk(chunk_pos, chunk_range, tab->size_a);
+		high = find_high_chunk(chunk_pos, chunk_range, size);
 		push_chunk_to_b(tab, strategy, low, high);
 		chunk_pos++;
 	}

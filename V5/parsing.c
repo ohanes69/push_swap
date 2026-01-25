@@ -6,7 +6,7 @@
 /*   By: samarkar <samarkar@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/06 16:32:02 by samarkar          #+#    #+#             */
-/*   Updated: 2026/01/24 14:25:44 by samarkar         ###   ########lyon.fr   */
+/*   Updated: 2026/01/25 04:03:04 by samarkar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,6 @@ static int	is_flag(char *s, t_data *data)
 	if (data->flag1 == data->flag2)
 		return (0);
 	return (flags);
-
 }
 
 static int	count_flag(t_data *data, char **args)

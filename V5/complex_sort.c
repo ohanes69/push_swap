@@ -3,43 +3,43 @@
 /*                                                        :::      ::::::::   */
 /*   complex_sort.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lucpelle <lucpelle@student.42.fr>          +#+  +:+       +#+        */
+/*   By: samarkar <samarkar@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/06 15:11:27 by lucpelle          #+#    #+#             */
-/*   Updated: 2026/01/22 13:04:53 by lucpelle         ###   ########.fr       */
+/*   Updated: 2026/01/25 03:27:34 by samarkar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 #include <stdlib.h>
 
-static void	radix(t_tab *a, t_tab *b, size_t size, size_t current_bits)
+static void	radix(t_tab *tab, t_strategy *strategy, size_t size, size_t current_bits)
 {
 	size_t	i;
-	
+
 	i = 0;
 	while (i < size)
 	{
-		if ((a->tab[0] >> current_bits & 1) == 0)
+		if ((tab->a[0] >> current_bits & 1) == 0)
 		{
-			push(a, b, "pb");
-			a->pb++;
+			push_b(tab);
+			strategy->pb++;
 		}
 		else
 		{
-			rotate(a, "ra");
-			a->ra++;
+			rotate_a(tab);
+			strategy->ra++;
 		}
 		++i;
 	}
-	while (b->size != 0)
+	while (tab->size_b != 0)
 	{
-		push(b, a, "pa");
-		a->pa++;
+		push_a(tab);
+		strategy->pa++;
 	}
 }
 
-void	complex_sort(t_tab *a, t_tab *b, size_t size)
+void	complex_sort(t_tab *tab, t_strategy *strategy, size_t size)
 {
 	size_t	max_bits;
 	size_t	current_bits;
@@ -50,7 +50,7 @@ void	complex_sort(t_tab *a, t_tab *b, size_t size)
 		++max_bits;
 	while (current_bits < max_bits)
 	{
-		radix(a, b, size, current_bits);
+		radix(tab, strategy, size, current_bits);
 		++current_bits;
 	}
 }
