@@ -6,14 +6,14 @@
 /*   By: samarkar <samarkar@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/12 20:18:46 by samarkar          #+#    #+#             */
-/*   Updated: 2026/01/25 03:35:28 by samarkar         ###   ########lyon.fr   */
+/*   Updated: 2026/01/25 18:07:16 by samarkar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 #include <stdio.h>
 
-void	rotate_to_top(t_tab *tab, t_strategy *strategy, size_t pos)
+static void	rotate_to_top(t_tab *tab, t_strategy *strategy, size_t pos)
 {
 	size_t	dist_top;
 	size_t	dist_bot;
@@ -68,27 +68,27 @@ static size_t	find_closest_in_chunk(t_tab *tab, size_t low, size_t high)
 	return (best_pos);
 }
 
-static void	rotate_push_element(t_tab *tab, t_strategy *strategy, size_t low, size_t high)
+static void	rotate_push_elem(t_tab *tab, t_strategy *s, size_t low, size_t high)
 {
 	size_t	pos;
 
 	pos = find_closest_in_chunk(tab, low, high);
 	if (pos == tab->size_a)
 		return ;
-	rotate_to_top(tab, strategy, pos);
+	rotate_to_top(tab, s, pos);
 	push_b(tab);
-	strategy->pb++;
+	s->pb++;
 }
 
-static void	push_chunk_to_b(t_tab *tab, t_strategy *strategy, size_t low, size_t high)
+static void	push_chunk_to_b(t_tab *tab, t_strategy *s, size_t low, size_t high)
 {
 	while (is_in_chunk(tab, low, high) == 1)
 	{
-		rotate_push_element(tab, strategy, low, high);
+		rotate_push_elem(tab, s, low, high);
 		if (tab->b[0] <= (int)((low + high) / 2))
 		{
 			rotate_b(tab);
-			strategy->rb++;
+			s->rb++;
 		}
 	}
 }

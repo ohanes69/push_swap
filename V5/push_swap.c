@@ -6,14 +6,14 @@
 /*   By: samarkar <samarkar@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/22 10:09:10 by samarkar          #+#    #+#             */
-/*   Updated: 2026/01/25 17:08:53 by samarkar         ###   ########lyon.fr   */
+/*   Updated: 2026/01/25 18:23:40 by samarkar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 #include <stdio.h>
 
-void	choose_metric(t_data *data, float metric)
+static void	choose_metric(t_data *data, float metric)
 {
 	if (metric < 0.2)
 		data->flag1 = 1;
@@ -23,7 +23,7 @@ void	choose_metric(t_data *data, float metric)
 		data->flag1 = 3;
 }
 
-void	choose_sort(t_data *data, t_tab *tab, t_strategy *strategy)
+static void	choose_sort(t_data *data, t_tab *tab, t_strategy *strategy)
 {
 	if (data->flag1 == 1)
 		simple_sort(tab, strategy);
@@ -33,23 +33,23 @@ void	choose_sort(t_data *data, t_tab *tab, t_strategy *strategy)
 		complex_sort(tab, strategy, tab->size_a);
 }
 
-void	sort_tab(t_data *data, t_tab *tab, t_strategy *strategy, float metric)
+static void	sort_tab(t_data *data, t_tab *tab, t_strategy *s, float metric)
 {
 	if (metric == 0)
 	{
 		if (data->flag2 == 5)
-			strategy_use(data, strategy, metric);
+			strategy_use(data, s, metric);
 		return ;
 	}
 	if (data->flag1 >= 1 && data->flag1 <= 3)
-		choose_sort(data, tab, strategy);
+		choose_sort(data, tab, s);
 	else if (data->flag1 == 0 || data->flag1 == 4)
 	{
 		choose_metric(data, metric);
-		choose_sort(data, tab, strategy);
+		choose_sort(data, tab, s);
 	}
 	if (data->flag2 == 5)
-		strategy_use(data, strategy, metric);
+		strategy_use(data, s, metric);
 }
 
 void	push_swap(t_tab *tab, t_strategy *strategy, t_data *data)

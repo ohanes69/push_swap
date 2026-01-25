@@ -6,7 +6,7 @@
 /*   By: samarkar <samarkar@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/19 17:55:26 by samarkar          #+#    #+#             */
-/*   Updated: 2026/01/24 14:51:07 by samarkar         ###   ########lyon.fr   */
+/*   Updated: 2026/01/25 17:51:43 by samarkar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 float	compute_disorder(t_tab *tab)
 {
 	size_t	i;
-	size_t 	j;
+	size_t	j;
 	size_t	total_pairs;
 	size_t	mistakes;
 	float	metric;

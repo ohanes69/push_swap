@@ -6,7 +6,7 @@
 /*   By: samarkar <samarkar@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/19 14:07:23 by samarkar          #+#    #+#             */
-/*   Updated: 2026/01/25 16:50:35 by samarkar         ###   ########lyon.fr   */
+/*   Updated: 2026/01/25 17:49:36 by samarkar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,9 @@ static void	operations(t_strategy *strategy)
 {
 	int	total_ops;
 
-	total_ops = strategy->sa + strategy->sb + strategy->ss + strategy->pa + strategy->pb
-		+ strategy->ra + strategy->rb + strategy->rr + strategy->rra + strategy->rrb + strategy->rrr;
+	total_ops = strategy->sa + strategy->sb + strategy->ss
+		+ strategy->pa + strategy->pb + strategy->ra + strategy->rb
+		+ strategy->rr + strategy->rra + strategy->rrb + strategy->rrr;
 	ft_printf("\n[bench] total_ops: ");
 	ft_printf("%d", total_ops);
 	ft_printf("\n[bench] ");
