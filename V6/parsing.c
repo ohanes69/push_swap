@@ -6,7 +6,7 @@
 /*   By: lucpelle <lucpelle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/06 16:32:02 by samarkar          #+#    #+#             */
-/*   Updated: 2026/01/26 09:40:02 by lucpelle         ###   ########.fr       */
+/*   Updated: 2026/01/26 11:42:52 by lucpelle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ bool	is_duplicate(t_tab *tab, int value, size_t size)
 	return (true);
 }
 
-static int	is_valid_int(const char *s, t_data *data)
+int	is_valid_int(const char *s, t_data *data)
 {
 	size_t	i;
 	size_t	digits;
@@ -95,7 +95,7 @@ static int	is_valid_int(const char *s, t_data *data)
 	return (1);
 }
 
-static bool	is_flag(char *s, t_data *data)
+bool	is_flag(char *s, t_data *data)
 {
 	size_t	flags;
 
@@ -176,7 +176,7 @@ static char	*join_args(int argc, char **argv)
 	i = 2;
 	if (!args)
 		return (NULL);
-	while (i < argc)
+	while (i < (size_t)argc)
 	{
 		tmp = ft_strjoin(args, " ");
 		free(args);
@@ -215,6 +215,7 @@ bool	parsing(int argc, char **argv, t_data *data, t_tab *tab)
 	}
 	ft_free_tab(args);
 	data->size -= data->nb_flag;
-	indexing(tab, data);
+	if (!indexing(tab, data))
+		return (false);
 	return (true);
 }

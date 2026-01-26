@@ -6,7 +6,7 @@
 /*   By: lucpelle <lucpelle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/22 11:02:56 by samarkar          #+#    #+#             */
-/*   Updated: 2026/01/26 10:28:56 by lucpelle         ###   ########.fr       */
+/*   Updated: 2026/01/26 11:15:56 by lucpelle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,10 +43,19 @@ int	main(int ac, char **av)
 	t_data 		data;
 	t_tab		tab;
 
-	if (ac <= 2)
-		return (1);
 	init_stack(&strategy);
 	init_data(&data);
+	if (ac <= 2)
+	{
+		if (ac == 2)
+		{			
+			if (is_valid_int(av[1], &data))
+				return (1);
+			else
+				write (2, "Error\n", 6);
+			}
+		return (1);
+	}
 	if (!parsing(ac, av, &data, &tab))
 	{
 		write (2, "Error\n", 6);

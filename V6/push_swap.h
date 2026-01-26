@@ -6,7 +6,7 @@
 /*   By: lucpelle <lucpelle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/12 21:52:01 by samarkar          #+#    #+#             */
-/*   Updated: 2026/01/26 10:29:03 by lucpelle         ###   ########.fr       */
+/*   Updated: 2026/01/26 11:42:36 by lucpelle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,18 @@
 # include <stdbool.h>
 
 # ifndef BUF_SIZE
-#  define BUF_SIZE 1024
+#  define BUF_SIZE 100
 # endif
+
+// typedef enum
+// {
+// 	NONE,
+// 	SIMPLE,
+// 	MEDIUM,
+// 	COMPLEX,
+// 	ADAPTIVE,
+// 	BENCH,
+// } strategy;
 
 typedef struct s_tab
 {
@@ -61,6 +71,8 @@ typedef struct s_strategy
 
 
 void	ft_printf(const char *s, ...);
+bool	is_flag(char *s, t_data *data);
+int		is_valid_int(const char *s, t_data *data);
 void	strategy_use(t_data *data, t_strategy *strategy, float metric);
 bool	indexing(t_tab *tab, t_data *data);
 void	print_error(void);
