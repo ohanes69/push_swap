@@ -6,7 +6,7 @@
 /*   By: lucpelle <lucpelle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/19 17:55:45 by samarkar          #+#    #+#             */
-/*   Updated: 2026/01/24 03:05:25 by lucpelle         ###   ########.fr       */
+/*   Updated: 2026/01/26 13:36:10 by lucpelle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ static size_t	is_charset(char c, char set)
 	return (1);
 }
 
-char	*ft_strdup2(char const *s1, char set)
+static char	*ft_strdup_split(char const *s1, char set)
 {
 	size_t		i;
 	size_t		len;
@@ -94,7 +94,7 @@ char	**ft_split(char const *s, char c, t_data *data)
 	{
 		while (*s != '\0' && is_charset(*s, c) == 0)
 			s++;
-		tab[i] = ft_strdup2(s, c);
+		tab[i] = ft_strdup_split(s, c);
 		if (!tab[i])
 		{
 			ft_free_tab(tab);

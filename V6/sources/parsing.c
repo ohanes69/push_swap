@@ -3,140 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: samarkar <samarkar@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: lucpelle <lucpelle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/06 16:32:02 by samarkar          #+#    #+#             */
-/*   Updated: 2026/01/26 12:30:11 by samarkar         ###   ########lyon.fr   */
+/*   Updated: 2026/01/26 13:32:08 by lucpelle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 #include <limits.h>
 #include <stdbool.h>
-
-static size_t	ft_strlen(const char *s)
-{
-	size_t	i;
-
-	i = 0;
-	while (s[i])
-		i++;
-	return (i);
-}
-
-static char	*ft_strjoin(char const *s1, char const *s2)
-{
-	char	*join;
-	size_t	len_s1;
-	size_t	len_s2;
-
-	len_s1 = ft_strlen(s1);
-	len_s2 = ft_strlen(s2);
-	join = malloc(sizeof(char) * (len_s1 + len_s2 + 1));
-	if (!join)
-		return (NULL);
-	ft_memcpy(join, s1, len_s1);
-	ft_memcpy(join + len_s1, s2, len_s2);
-	join[len_s1 + len_s2] = '\0';
-	return (join);
-}
-
-char	*ft_strdup(const char *s1)
-{
-	size_t	len;
-	char	*dup;
-
-	len = ft_strlen(s1);
-	dup = malloc(sizeof(char) * (len + 1));
-	if (!dup)
-		return (NULL);
-	ft_memcpy(dup, s1, len);
-	dup[len] = '\0';
-	return (dup);
-}
-
-bool	is_duplicate(t_tab *tab, int value, size_t size)
-{
-	size_t	i;
-
-	i = 0;
-	while (i < size)
-	{
-		if (tab->a[i] == value)
-			return (false);
-		i++;
-	}
-	return (true);
-}
-
-int	is_valid_int(const char *s, t_data *data)
-{
-	size_t	i;
-	size_t	digits;
-	long	value;
-
-	i = 0;
-	digits = 0;
-	if (s[i] == '+' || s[i] == '-')
-		i++;
-	while (s[i])
-	{
-		if (s[i] < '0' || s[i] > '9')
-			return (0);
-		digits++;
-		i++;
-	}
-	if (digits > 10)
-		return (0);
-	value = ft_atoi_long(s);
-	if (value < INT_MIN || value > INT_MAX)
-		return (0);
-	data->value = (int)value;
-	return (1);
-}
-
-bool	is_flag(char *s, t_data *data)
-{
-	size_t	flags;
-
-	if (!s[0] || !s[1] || s[0] != '-' || s[1] != '-')
-		return (false);
-	flags = compare_flag(s);
-	if (flags == NONE)
-		return (false);
-	if (flags == data->flag1 || flags == data->flag2)
-		return (false);
-	if (flags >= SIMPLE && flags <= ADAPTIVE)
-	{
-		if (data->flag1 != NONE)
-			return (false);
-		else
-			data->flag1 = flags;
-	}
-	if (flags == BENCH)
-	{
-		if (data->flag2 != NONE)
-			return (false);
-		else
-			data->flag2 = flags;
-	}
-	return (true);
-}
-
-static int	count_flag(t_data *data, char **args)
-{
-	size_t	i;
-
-	data->nb_flag = 0;
-	i = 0;
-	while (i < data->size)
-	{
-		if (is_flag(args[i], data) != 0)
-			data->nb_flag++;
-		i++;
-	}
-	return (data->nb_flag);
-}
 
 bool	init_tab(char **args, t_data *data, t_tab *tab)
 {

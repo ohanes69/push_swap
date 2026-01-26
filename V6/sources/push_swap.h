@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: samarkar <samarkar@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: lucpelle <lucpelle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/12 21:52:01 by samarkar          #+#    #+#             */
-/*   Updated: 2026/01/26 12:33:38 by samarkar         ###   ########lyon.fr   */
+/*   Updated: 2026/01/26 13:38:55 by lucpelle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 #  define BUF_SIZE 100
 # endif
 
-typedef enum flags
+typedef enum e_flags
 {
 	NONE,
 	SIMPLE,
@@ -29,7 +29,7 @@ typedef enum flags
 	COMPLEX,
 	ADAPTIVE,
 	BENCH,
-}	flags;
+}	t_flags;
 
 typedef struct s_tab
 {
@@ -72,18 +72,19 @@ typedef struct s_move
 void	ft_printf(const char *s, ...);
 bool	is_flag(char *s, t_data *data);
 int		is_valid_int(const char *s, t_data *data);
+bool	is_duplicate(t_tab *tab, int value, size_t size);
 void	bench(t_data *data, t_move *move, float metric);
 bool	indexing(t_tab *tab, t_data *data);
 void	ft_free_tab(char **tab);
 char	**ft_split(char const *s, char c, t_data *data);
 bool	parsing(int argc, char **argv, t_data *data, t_tab *tab);
 long	ft_atoi_long(const char *str);
-void	*ft_calloc(size_t count, size_t size);
+char	*ft_strjoin(char const *s1, char const *s2);
 bool	push_swap(t_tab *tab, t_move *move, t_data *data);
 void	*ft_memcpy(void *dest, const void *src, size_t n);
 size_t	compare_flag(char *s1);
+int		count_flag(t_data *data, char **args);
 char	*ft_strdup(const char *s1);
-char	*ft_strdup2(char const *s1, char set);
 void	swap(t_tab *tab, char c);
 void	push_a(t_tab *tab);
 void	push_b(t_tab *tab);

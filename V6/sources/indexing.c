@@ -6,7 +6,7 @@
 /*   By: lucpelle <lucpelle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/22 11:18:55 by samarkar          #+#    #+#             */
-/*   Updated: 2026/01/26 08:25:04 by lucpelle         ###   ########.fr       */
+/*   Updated: 2026/01/26 13:23:51 by lucpelle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #include "push_swap.h"
 #include <stdio.h>
 
-int	find_index(int nb, size_t size, int *buffer)
+static int	find_index(int nb, size_t size, int *buffer)
 {
 	size_t	i;
 	int		pos;
