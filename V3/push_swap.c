@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: samarkar <samarkar@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: lucpelle <lucpelle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/22 10:09:10 by samarkar          #+#    #+#             */
-/*   Updated: 2026/01/23 16:48:17 by samarkar         ###   ########lyon.fr   */
+/*   Updated: 2026/01/26 09:45:24 by lucpelle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,18 +57,6 @@ size_t	count_flags(char **args, t_tab *stack)
 	if (flags > 2)
 		print_error();
 	return (flags);
-}
-
-void	set_table(char **args, t_tab *a)
-{
-	size_t	i;
-
-	i = 0;
-	while (args[i])
-	{
-		a->tab[i] = is_valid_int(args[i]);
-		i++;
-	}
 }
 
 size_t	choose_metric(size_t strategy, float metric)
