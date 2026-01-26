@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lucpelle <lucpelle@student.42.fr>          +#+  +:+       +#+        */
+/*   By: samarkar <samarkar@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/12 21:52:01 by samarkar          #+#    #+#             */
-/*   Updated: 2026/01/26 12:09:53 by lucpelle         ###   ########.fr       */
+/*   Updated: 2026/01/26 12:33:38 by samarkar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ typedef enum flags
 	COMPLEX,
 	ADAPTIVE,
 	BENCH,
-} flags;
+}	flags;
 
 typedef struct s_tab
 {
@@ -68,7 +68,6 @@ typedef struct s_move
 	int	rrb;
 	int	rrr;
 }	t_move;
-
 
 void	ft_printf(const char *s, ...);
 bool	is_flag(char *s, t_data *data);

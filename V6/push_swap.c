@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lucpelle <lucpelle@student.42.fr>          +#+  +:+       +#+        */
+/*   By: samarkar <samarkar@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/22 10:09:10 by samarkar          #+#    #+#             */
-/*   Updated: 2026/01/26 12:11:03 by lucpelle         ###   ########.fr       */
+/*   Updated: 2026/01/26 12:30:59 by samarkar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ static void	strategy_select(t_data *data, t_tab *tab, t_move *move, float metric
 bool	push_swap(t_tab *tab, t_move *move, t_data *data)
 {
 	float	metric;
-	
+
 	tab->size_a = data->size;
 	tab->size_b = 0;
 	tab->b = malloc(sizeof(int) * (tab->size_a));

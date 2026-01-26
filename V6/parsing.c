@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lucpelle <lucpelle@student.42.fr>          +#+  +:+       +#+        */
+/*   By: samarkar <samarkar@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/06 16:32:02 by samarkar          #+#    #+#             */
-/*   Updated: 2026/01/26 12:09:42 by lucpelle         ###   ########.fr       */
+/*   Updated: 2026/01/26 12:30:11 by samarkar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,7 @@ bool	is_flag(char *s, t_data *data)
 	size_t	flags;
 
 	if (!s[0] || !s[1] || s[0] != '-' || s[1] != '-')
-    	return (false);
+		return (false);
 	flags = compare_flag(s);
 	if (flags == NONE)
 		return (false);
@@ -118,7 +118,7 @@ bool	is_flag(char *s, t_data *data)
 		if (data->flag2 != NONE)
 			return (false);
 		else
-			data->flag2 = flags;	
+			data->flag2 = flags;
 	}
 	return (true);
 }
@@ -142,7 +142,7 @@ bool	init_tab(char **args, t_data *data, t_tab *tab)
 {
 	size_t		i;
 	size_t		j;
-	
+
 	j = 0;
 	i = 0;
 	tab->a = malloc(sizeof(int) * (data->size - data->nb_flag));
@@ -152,7 +152,8 @@ bool	init_tab(char **args, t_data *data, t_tab *tab)
 	{
 		if (!is_flag(args[i], data))
 		{
-			if(!is_valid_int(args[i], data) || !is_duplicate(tab, data->value, j))
+			if (!is_valid_int(args[i], data)
+				|| !is_duplicate(tab, data->value, j))
 			{
 				free(tab->a);
 				return (false);
@@ -189,7 +190,7 @@ static char	*join_args(int argc, char **argv)
 			return (NULL);
 		args = tmp;
 		++i;
-	} 
+	}
 	return (args);
 }
 
@@ -197,7 +198,7 @@ bool	parsing(int argc, char **argv, t_data *data, t_tab *tab)
 {
 	char	**args;
 	char	*args_join;
-	
+
 	args_join = join_args(argc, argv);
 	if (!args_join)
 		return (false);
@@ -209,7 +210,7 @@ bool	parsing(int argc, char **argv, t_data *data, t_tab *tab)
 	data->flag1 = NONE;
 	data->flag2 = NONE;
 	if (!init_tab(args, data, tab))
-	{	
+	{
 		ft_free_tab(args);
 		return (false);
 	}

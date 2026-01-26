@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lucpelle <lucpelle@student.42.fr>          +#+  +:+       +#+        */
+/*   By: samarkar <samarkar@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/22 11:02:56 by samarkar          #+#    #+#             */
-/*   Updated: 2026/01/26 11:46:16 by lucpelle         ###   ########.fr       */
+/*   Updated: 2026/01/26 12:17:34 by samarkar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,8 @@ void	init_data(t_data *data)
 
 int	main(int ac, char **av)
 {
-	t_move 	move;
-	t_data 		data;
+	t_move		move;
+	t_data		data;
 	t_tab		tab;
 
 	init_stack(&move);
@@ -48,18 +48,18 @@ int	main(int ac, char **av)
 	if (ac <= 2)
 	{
 		if (ac == 2)
-		{			
+		{
 			if (is_valid_int(av[1], &data))
 				return (1);
 			else
 				write (2, "Error\n", 6);
-			}
+		}
 		return (1);
 	}
 	if (!parsing(ac, av, &data, &tab))
 	{
 		write (2, "Error\n", 6);
-		return (1);	
+		return (1);
 	}
 	push_swap(&tab, &move, &data);
 	return (0);
