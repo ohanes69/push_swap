@@ -6,7 +6,7 @@
 /*   By: samarkar <samarkar@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/06 16:32:02 by samarkar          #+#    #+#             */
-/*   Updated: 2026/01/26 17:19:35 by samarkar         ###   ########lyon.fr   */
+/*   Updated: 2026/01/26 23:21:43 by samarkar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,18 @@ bool	init_tab(char **args, t_data *data, t_tab *tab)
 	if (data->nb_flag > 2)
 		return (false);
 	return (true);
+}
+
+static int	only_spaces_or_flags(char **args)
+{
+	if (args[0] == NULL)
+		return (0);
+	if (compare_flag(args[0]) > 0 && args[1] == NULL)
+		return (0);
+	if (compare_flag(args[0]) > 0 && compare_flag(args[1]) > 0
+		&& args[2] == NULL)
+		return (0);
+	return (1);
 }
 
 static char	*join_args(int argc, char **argv)
@@ -81,6 +93,8 @@ bool	parsing(int argc, char **argv, t_data *data, t_tab *tab)
 	args = ft_split(args_join, ' ', data);
 	free(args_join);
 	if (!args)
+		return (false);
+	if (only_spaces_or_flags(args) == 0)
 		return (false);
 	count_flag(data, args);
 	data->flag_strategy = NONE;

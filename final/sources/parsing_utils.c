@@ -6,7 +6,7 @@
 /*   By: samarkar <samarkar@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/12 20:36:10 by samarkar          #+#    #+#             */
-/*   Updated: 2026/01/26 17:19:35 by samarkar         ###   ########lyon.fr   */
+/*   Updated: 2026/01/26 23:18:19 by samarkar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #include <stdint.h>
 #include <limits.h>
 
-static size_t	compare_flag(char *s1)
+size_t	compare_flag(char *s1)
 {
 	size_t	i;
 	size_t	j;

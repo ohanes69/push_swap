@@ -6,7 +6,7 @@
 /*   By: samarkar <samarkar@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/12 21:52:01 by samarkar          #+#    #+#             */
-/*   Updated: 2026/01/26 17:19:35 by samarkar         ###   ########lyon.fr   */
+/*   Updated: 2026/01/26 23:18:57 by samarkar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,8 @@ typedef struct s_move
 }	t_move;
 
 void	ft_printf(const char *s, ...);
+size_t	compare_flag(char *s1);
+int		count_flag(t_data *data, char **args);
 bool	is_flag(char *s, t_data *data);
 int		is_valid_int(const char *s, t_data *data);
 bool	is_duplicate(t_tab *tab, int value, size_t size);
@@ -82,7 +84,6 @@ long	ft_atoi_long(const char *str);
 char	*ft_strjoin(char const *s1, char const *s2);
 bool	push_swap(t_tab *tab, t_move *move, t_data *data);
 void	*ft_memcpy(void *dest, const void *src, size_t n);
-int		count_flag(t_data *data, char **args);
 char	*ft_strdup(const char *s1);
 void	swap(t_tab *tab, char c);
 void	push_a(t_tab *tab);
