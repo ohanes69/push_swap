@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lucpelle <lucpelle@student.42.fr>          +#+  +:+       +#+        */
+/*   By: samarkar <samarkar@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/12 20:36:10 by samarkar          #+#    #+#             */
-/*   Updated: 2026/01/26 13:31:59 by lucpelle         ###   ########.fr       */
+/*   Updated: 2026/01/26 14:27:55 by samarkar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #include <stdint.h>
 #include <limits.h>
 
-size_t	compare_flag(char *s1)
+static size_t	compare_flag(char *s1)
 {
 	size_t	i;
 	size_t	j;

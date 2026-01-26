@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   bench.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lucpelle <lucpelle@student.42.fr>          +#+  +:+       +#+        */
+/*   By: samarkar <samarkar@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/19 14:07:23 by samarkar          #+#    #+#             */
-/*   Updated: 2026/01/26 12:09:19 by lucpelle         ###   ########.fr       */
+/*   Updated: 2026/01/26 14:26:13 by samarkar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ void	bench(t_data *data, t_move *move, float metric)
 {
 	print_disorder(metric);
 	ft_printf("\n[bench] ");
-	ft_printf("move:");
+	ft_printf("strategy:");
 	if (metric > 0)
 	{
 		if (data->flag1 == NONE || data->flag1 == ADAPTIVE)
