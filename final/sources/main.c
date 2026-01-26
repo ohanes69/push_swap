@@ -6,7 +6,7 @@
 /*   By: samarkar <samarkar@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/22 11:02:56 by samarkar          #+#    #+#             */
-/*   Updated: 2026/01/26 17:19:35 by samarkar         ###   ########lyon.fr   */
+/*   Updated: 2026/01/26 18:56:56 by samarkar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,17 +45,8 @@ int	main(int ac, char **av)
 
 	init_stack(&move);
 	init_data(&data);
-	if (ac <= 2)
-	{
-		if (ac == 2)
-		{
-			if (is_valid_int(av[1], &data))
-				return (1);
-			else
-				write (2, "Error\n", 6);
-		}
+	if (ac < 2)
 		return (1);
-	}
 	if (!parsing(ac, av, &data, &tab))
 	{
 		write (2, "Error\n", 6);
