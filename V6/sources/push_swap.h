@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lucpelle <lucpelle@student.42.fr>          +#+  +:+       +#+        */
+/*   By: samarkar <samarkar@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/12 21:52:01 by samarkar          #+#    #+#             */
-/*   Updated: 2026/01/26 13:38:55 by lucpelle         ###   ########.fr       */
+/*   Updated: 2026/01/26 14:04:14 by samarkar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,6 @@ long	ft_atoi_long(const char *str);
 char	*ft_strjoin(char const *s1, char const *s2);
 bool	push_swap(t_tab *tab, t_move *move, t_data *data);
 void	*ft_memcpy(void *dest, const void *src, size_t n);
-size_t	compare_flag(char *s1);
 int		count_flag(t_data *data, char **args);
 char	*ft_strdup(const char *s1);
 void	swap(t_tab *tab, char c);
@@ -92,7 +91,6 @@ void	rotate_a(t_tab *tab);
 void	rotate_b(t_tab *tab);
 void	reverse_rotate_a(t_tab *tab);
 void	reverse_rotate_b(t_tab *tab);
-float	compute_disorder(t_tab *a);
 void	simple_sort(t_tab *tab, t_move *move);
 void	medium_sort(t_tab *tab, t_move *move, size_t size);
 void	complex_sort(t_tab *tab, t_move *move, size_t size);
