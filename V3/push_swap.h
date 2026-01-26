@@ -6,7 +6,7 @@
 /*   By: lucpelle <lucpelle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/12 21:52:01 by samarkar          #+#    #+#             */
-/*   Updated: 2026/01/24 03:05:36 by lucpelle         ###   ########.fr       */
+/*   Updated: 2026/01/26 08:23:56 by lucpelle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include <stdlib.h>
 # include <unistd.h>
+# include <stdbool.h>
 
 # ifndef BUF_SIZE
 #  define BUF_SIZE 1024
@@ -75,9 +76,9 @@ void	strategy_use(size_t strategy, t_tab *a, float metric);
 
 void	set_table(char **args, t_tab *a);
 
-void	is_duplicate(t_tab *a, size_t size);
+bool	is_duplicate(t_tab *tab, int value, size_t size);
 int		find_index(int nb, size_t size, int *buffer);
-void	indexing(t_tab *a, size_t size);
+bool	indexing(t_tab *tab, t_data *data);
 
 void	print_error(void);
 
@@ -86,7 +87,7 @@ char	**ft_split(char const *s, char c, t_data *data);
 
 size_t	count_args(int argc, char **argv);
 char	**fill_args(char **args, char **split, size_t *k);
-t_tab	*parsing(int argc, char **argv, t_tab *tab, t_data *data);
+bool    parsing(int argc, char **argv, t_data *data, t_tab *tab);
 
 long	ft_atoi_long(const char *str);
 void	*ft_calloc(size_t count, size_t size);

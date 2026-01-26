@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   indexing.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: samarkar <samarkar@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: lucpelle <lucpelle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/22 11:18:55 by samarkar          #+#    #+#             */
-/*   Updated: 2026/01/23 15:59:49 by samarkar         ###   ########lyon.fr   */
+/*   Updated: 2026/01/26 08:25:04 by lucpelle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,108 +14,6 @@
 #include <limits.h>
 #include "push_swap.h"
 #include <stdio.h>
-
-int	is_integer(const char *s)
-{
-	size_t	i;
-
-	i = 0;
-	if (s[i] == '+' || s[i] == '-')
-	{
-		i++;
-		if (!s[i])
-			return (0);
-	}
-	while (s[i])
-	{
-		if (s[i] < '0' || s[i] > '9')
-			return (0);
-		i++;
-	}
-	return (1);
-}
-
-char	**new_tab(char **args, size_t size)
-{
-	size_t	i;
-	size_t	j;
-	char	**new_tab;
-
-	i = 0;
-	j = 0;
-	new_tab = malloc(sizeof(char *) * (size + 1));
-	if (!new_tab)
-	{
-		free(new_tab);
-		return (NULL);
-	}
-	while (i < number_of_args(args))
-	{
-		if (is_flag(args[i]) == 0)
-		{
-			new_tab[j] = ft_strdup(args[i], '\0');
-			if (!new_tab[j])
-			{
-				ft_free_tab(new_tab);
-				return (NULL);
-			}
-			j++;
-			i++;
-		}
-		else
-			i++;
-	}
-	new_tab[j] = NULL;
-	return (new_tab);
-}
-
-int	is_valid_int(const char *s)
-{
-	size_t	i;
-	size_t	digits;
-	long	value;
-
-	i = 0;
-	digits = 0;
-	if (s[i] == '+' || s[i] == '-')
-	{
-		i++;
-		if (!s[i])
-			print_error();
-	}
-	while (s[i])
-	{
-		if (s[i] < '0' || s[i] > '9')
-			print_error();
-		digits++;
-		i++;
-	}
-	if (digits > 10)
-		print_error();
-	value = ft_atoi_long(s);
-	if (value < INT_MIN || value > INT_MAX)
-		print_error();
-	return ((int)value);
-}
-
-void	is_duplicate(t_tab *a, size_t size)
-{
-	size_t	i;
-	size_t	j;
-
-	i = 0;
-	while (i < size)
-	{
-		j = i + 1;
-		while (j < size)
-		{
-			if (a->tab[i] == a->tab[j])
-				print_error();
-			j++;
-		}
-		i++;
-	}
-}
 
 int	find_index(int nb, size_t size, int *buffer)
 {
@@ -133,20 +31,24 @@ int	find_index(int nb, size_t size, int *buffer)
 	return (pos);
 }
 
-void	indexing(t_tab *a, size_t size)
+bool	indexing(t_tab *tab, t_data *data)
 {
 	size_t	i;
 	int		*buffer;
 
-	buffer = malloc(sizeof(int) * size);
+	buffer = malloc(sizeof(int) * data->size);
 	if (!buffer)
-		return ;
-	buffer = ft_memcpy(buffer, a->tab, size * sizeof(int));
-	i = 0;
-	while (i < size)
 	{
-		a->tab[i] = find_index(a->tab[i], size, buffer);
+		free(tab->a);
+		return (false);
+	}
+	buffer = ft_memcpy(buffer, tab->a, data->size * sizeof(int));
+	i = 0;
+	while (i < data->size)
+	{
+		tab->a[i] = find_index(tab->a[i], data->size, buffer);
 		++i;
 	}
 	free(buffer);
+	return (true);
 }

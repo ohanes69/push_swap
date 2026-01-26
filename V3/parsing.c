@@ -6,12 +6,13 @@
 /*   By: lucpelle <lucpelle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/06 16:32:02 by samarkar          #+#    #+#             */
-/*   Updated: 2026/01/24 03:01:23 by lucpelle         ###   ########.fr       */
+/*   Updated: 2026/01/26 08:56:02 by lucpelle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 #include <limits.h>
+#include <stdbool.h>
 
 static size_t	ft_strlen(const char *s)
 {
@@ -54,6 +55,20 @@ char	*ft_strdup(const char *s1)
 	return (dup);
 }
 
+bool	is_duplicate(t_tab *tab, int value, size_t size)
+{
+	size_t	i;
+
+	i = 0;
+	while (i < size)
+	{
+		if (tab->a[i] == value)
+			return (false);
+		i++;
+	}
+	return (true);
+}
+
 static int	is_valid_int(const char *s, t_data *data)
 {
 	size_t	i;
@@ -80,25 +95,32 @@ static int	is_valid_int(const char *s, t_data *data)
 	return (1);
 }
 
-static int	is_flag(char *s, t_data *data)
+static bool	is_flag(char *s, t_data *data)
 {
 	size_t	flags;
 
-	if (!s[0] || !s[1])
-    	return (0);
-	if (s[0] != '-' || s[1] != '-')
-		return (0);
+	if (!s[0] || !s[1] || s[0] != '-' || s[1] != '-')
+    	return (false);
 	flags = ft_strcmp(s);
 	if (flags == 0)
-		return (0);
+		return (false);
+	if (flags == data->flag1 || flags == data->flag2)
+		return (false);
 	if (flags >= 1 && flags <= 4)
-		data->flag1 = flags;
+	{
+		if (data->flag1 != 0)
+			return (false);
+		else
+			data->flag1 = flags;
+	}
 	if (flags == 5)
-		data->flag2 = flags;
-	if (data->flag1 == data->flag2)
-		return (0);
-	return (flags);
-
+	{
+		if (data->flag2 != 0)
+			return (false);
+		else
+			data->flag2 = flags;	
+	}
+	return (true);
 }
 
 static int	count_flag(t_data *data, char **args)
@@ -116,26 +138,32 @@ static int	count_flag(t_data *data, char **args)
 	return (data->nb_flag);
 }
 
-static t_tab	*init_tab(char **args, t_tab *tab, t_data *data)
+bool	init_tab(char **args, t_data *data, t_tab *tab)
 {
-	size_t i;
-	size_t j;
+	size_t		i;
+	size_t		j;
 	
 	j = 0;
 	i = 0;
-	data->flag1 = 0;
-	data->flag2 = 0;
+	tab->a = malloc(sizeof(int) * (data->size - data->nb_flag));
+	if (!tab->a)
+		return (false);
 	while (i < data->size)
 	{
-		if (is_flag(args[i], data) == 0)
+		if (!is_flag(args[i], data))
 		{
-			if(is_valid_int(args[i], data) == 0)
-				return (NULL);
+			if(!is_valid_int(args[i], data) || !is_duplicate(tab, data->value, j))
+			{
+				free(tab->a);
+				return (false);
+			}
 			tab->a[j++] = data->value;
 		}
 		++i;
 	}
-	return (tab);
+	if (data->nb_flag > 2)
+		return (false);
+	return (true);
 }
 
 static char	*join_args(int argc, char **argv)
@@ -165,26 +193,29 @@ static char	*join_args(int argc, char **argv)
 	return (args);
 }
 
-t_tab	*parsing(int argc, char **argv, t_tab *tab, t_data *data)
+bool	parsing(int argc, char **argv, t_data *data, t_tab *tab)
 {
 	char	**args;
 	char	*args_join;
 	
 	args_join = join_args(argc, argv);
 	if (!args_join)
-		return (NULL);
+		return (false);
 	args = ft_split(args_join, ' ', data);
 	free(args_join);
 	if (!args)
-		return (NULL);
-	data->nb_flag = count_flag(data, args);
-	if (data->nb_flag > 2)
-		return (NULL);
-	tab->a = malloc(sizeof(int) * data->size - data->nb_flag);
-	if (!tab->a)
-		return (NULL);
-	tab = init_tab(args, tab, data);
-	if (!tab->a)
-		return (NULL);
-	return (tab);	
+		return (false);
+	count_flag(data, args);
+	data->flag1 = 0;
+	data->flag2 = 0;
+	if (!init_tab(args, data, tab))
+	{	
+		ft_free_tab(args);
+		return (false);
+	}
+	ft_free_tab(args);
+	data->size -= data->nb_flag;
+	indexing(tab, data);
+	free(tab->a);
+	return (true);
 }

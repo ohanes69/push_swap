@@ -6,7 +6,7 @@
 /*   By: lucpelle <lucpelle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/22 11:02:56 by samarkar          #+#    #+#             */
-/*   Updated: 2026/01/24 03:07:04 by lucpelle         ###   ########.fr       */
+/*   Updated: 2026/01/26 08:56:36 by lucpelle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,41 +28,31 @@ void	init_stack(t_strategy *stack)
 	stack->rrr = 0;
 }
 
-static void	free_all(t_tab *tab, t_strategy *strategy, t_data *data)
+void	init_data(t_data *data)
 {
-	if (tab)
-		free(tab);
-	if (strategy)
-		free(strategy);
-	if (data)
-		free(data);
+	data->size = 0;
+	data->strategy = 0;
+	data->bench = 0;
+	data->flag1 = 0;
+	data->flag2 = 0;
+	data->nb_flag = 0;
+	data->value = 0;
 }
 
 int	main(int ac, char **av)
 {
-	t_tab		*tab;
-	t_strategy 	*strategy;
-	t_data 		*data;
+	t_strategy 	strategy;
+	t_data 		data;
+	t_tab		tab;
 
 	if (ac <= 2)
 		return (0);
-	tab = malloc(sizeof(t_tab));
-	strategy = malloc(sizeof(t_strategy));
-	data = malloc(sizeof(t_data));
-	if (!tab || !strategy || !data)
+	init_stack(&strategy);
+	init_data(&data);
+	if (!parsing(ac, av, &data, &tab))
 	{
-		free_all(tab, strategy, data);
-		return (1);
+		write (2, "Error\n", 6);
+		return (1);	
 	}
-	init_stack(strategy);
-	tab = parsing(ac, av, tab, data);
-	size_t i = 0;
-	while (i < ac - 1)
-	{
-		printf("%d", tab->a[i]);
-		++i;
-	}
-	
-	// push_swap(args, a, b, size);
-	// free_all(tab, strategy, data);
+	// push_swap(&tab, &data, &strategy);
 }
