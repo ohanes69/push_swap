@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lucpelle <lucpelle@student.42.fr>          +#+  +:+       +#+        */
+/*   By: samarkar <samarkar@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/06 16:32:02 by samarkar          #+#    #+#             */
-/*   Updated: 2026/01/26 13:32:08 by lucpelle         ###   ########.fr       */
+/*   Updated: 2026/01/26 17:19:35 by samarkar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,8 +83,8 @@ bool	parsing(int argc, char **argv, t_data *data, t_tab *tab)
 	if (!args)
 		return (false);
 	count_flag(data, args);
-	data->flag1 = NONE;
-	data->flag2 = NONE;
+	data->flag_strategy = NONE;
+	data->flag_bench = NONE;
 	if (!init_tab(args, data, tab))
 	{
 		ft_free_tab(args);

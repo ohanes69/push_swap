@@ -6,7 +6,7 @@
 /*   By: samarkar <samarkar@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/22 11:02:56 by samarkar          #+#    #+#             */
-/*   Updated: 2026/01/26 12:17:34 by samarkar         ###   ########lyon.fr   */
+/*   Updated: 2026/01/26 17:19:35 by samarkar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,8 @@ void	init_stack(t_move *stack)
 void	init_data(t_data *data)
 {
 	data->size = 0;
-	data->flag1 = 0;
-	data->flag2 = 0;
+	data->flag_strategy = 0;
+	data->flag_bench = 0;
 	data->nb_flag = 0;
 	data->value = 0;
 }

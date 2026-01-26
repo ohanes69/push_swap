@@ -6,7 +6,7 @@
 /*   By: samarkar <samarkar@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/12 20:36:10 by samarkar          #+#    #+#             */
-/*   Updated: 2026/01/26 14:27:55 by samarkar         ###   ########lyon.fr   */
+/*   Updated: 2026/01/26 17:19:35 by samarkar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,21 +103,21 @@ bool	is_flag(char *s, t_data *data)
 	flags = compare_flag(s);
 	if (flags == NONE)
 		return (false);
-	if (flags == data->flag1 || flags == data->flag2)
+	if (flags == data->flag_strategy || flags == data->flag_bench)
 		return (false);
 	if (flags >= SIMPLE && flags <= ADAPTIVE)
 	{
-		if (data->flag1 != NONE)
+		if (data->flag_strategy != NONE)
 			return (false);
 		else
-			data->flag1 = flags;
+			data->flag_strategy = flags;
 	}
 	if (flags == BENCH)
 	{
-		if (data->flag2 != NONE)
+		if (data->flag_bench != NONE)
 			return (false);
 		else
-			data->flag2 = flags;
+			data->flag_bench = flags;
 	}
 	return (true);
 }

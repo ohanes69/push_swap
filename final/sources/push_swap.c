@@ -6,7 +6,7 @@
 /*   By: samarkar <samarkar@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/22 10:09:10 by samarkar          #+#    #+#             */
-/*   Updated: 2026/01/26 14:28:39 by samarkar         ###   ########lyon.fr   */
+/*   Updated: 2026/01/26 17:19:35 by samarkar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,15 +46,15 @@ static void	strategy_select(t_data *data, t_tab *tab, t_move *mv, float metric)
 {
 	if (metric == 0)
 	{
-		if (data->flag2 == 5)
+		if (data->flag_bench == 5)
 			bench(data, mv, metric);
 		return ;
 	}
-	if (data->flag1 == 1)
+	if (data->flag_strategy == 1)
 		simple_sort(tab, mv);
-	else if (data->flag1 == 2)
+	else if (data->flag_strategy == 2)
 		medium_sort(tab, mv, tab->size_a);
-	else if (data->flag1 == 3)
+	else if (data->flag_strategy == 3)
 		complex_sort(tab, mv, tab->size_a);
 	else
 	{
@@ -65,7 +65,7 @@ static void	strategy_select(t_data *data, t_tab *tab, t_move *mv, float metric)
 		if (metric >= 0.5)
 			complex_sort(tab, mv, tab->size_a);
 	}
-	if (data->flag2 == 5)
+	if (data->flag_bench == 5)
 		bench(data, mv, metric);
 }
 

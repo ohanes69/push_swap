@@ -6,7 +6,7 @@
 /*   By: samarkar <samarkar@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/19 14:07:23 by samarkar          #+#    #+#             */
-/*   Updated: 2026/01/26 14:26:13 by samarkar         ###   ########lyon.fr   */
+/*   Updated: 2026/01/26 17:19:12 by samarkar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ void	bench(t_data *data, t_move *move, float metric)
 	ft_printf("strategy:");
 	if (metric > 0)
 	{
-		if (data->flag1 == NONE || data->flag1 == ADAPTIVE)
+		if (data->flag_strategy == NONE || data->flag_strategy == ADAPTIVE)
 		{
 			if (metric < 0.2)
 				ft_printf(" Simple / O(n²)");
@@ -68,11 +68,11 @@ void	bench(t_data *data, t_move *move, float metric)
 			if (metric >= 0.5)
 				ft_printf(" Complex / O(n log n)");
 		}
-		if (data->flag1 == SIMPLE)
+		if (data->flag_strategy == SIMPLE)
 			ft_printf(" Simple / O(n²)");
-		else if (data->flag1 == MEDIUM)
+		else if (data->flag_strategy == MEDIUM)
 			ft_printf(" Medium / O(n√n)");
-		else if (data->flag1 == COMPLEX)
+		else if (data->flag_strategy == COMPLEX)
 			ft_printf(" Complex / O(n log n)");
 	}
 	count_ops(move);

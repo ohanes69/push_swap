@@ -6,7 +6,7 @@
 /*   By: samarkar <samarkar@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/12 21:52:01 by samarkar          #+#    #+#             */
-/*   Updated: 2026/01/26 14:28:42 by samarkar         ###   ########lyon.fr   */
+/*   Updated: 2026/01/26 17:19:35 by samarkar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,8 @@ typedef struct s_buffer
 typedef struct s_data
 {
 	size_t	size;
-	size_t	flag1;
-	size_t	flag2;
+	size_t	flag_strategy;
+	size_t	flag_bench;
 	size_t	nb_flag;
 	int		value;
 }	t_data;
