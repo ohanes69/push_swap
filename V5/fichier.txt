@@ -1,0 +1,10 @@
+./a.out --bench --adaptive $(shuf -i 1-1000 -n 500) | wc -l
+./a.out --bench --adaptive 45 21 47 85 95
+shuf -i 0-9999 -n 500 > args.txt ; ./a.out --bench --adaptive $(cat args.txt) 2> bench.txt | ./checker_linux $(cat args.txt)
+ARG="4 67 3 87 23"; ./a.out --bench --adaptive $ARG 2> bench.txt | ./checker_linux -d $ARG
+ARG="0 2 1"; ./a.out $ARG | ./checker_linux $ARG
+./a.out --bench --simple 5 4 3 2 1 2>/dev/null
+./a.out --bench --simple 5 4 3 2 1 2>bench.txt>/dev/null && cat bench.txt
+shuf -i 1-1000 -n 500 > chiffre.txt ; ./a.out $(cat chiffre.txt) | ./checker_linux $(cat chiffre.txt)
+shuf -i 1-1000 -n 500 > chiffre.txt ; ./a.out $(cat chiffre.txt) | wc -l
+funcheck -c -a ./a.out --bench --medium -5 20 10
