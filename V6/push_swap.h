@@ -6,7 +6,7 @@
 /*   By: lucpelle <lucpelle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/12 21:52:01 by samarkar          #+#    #+#             */
-/*   Updated: 2026/01/26 11:42:36 by lucpelle         ###   ########.fr       */
+/*   Updated: 2026/01/26 12:09:53 by lucpelle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,15 +21,15 @@
 #  define BUF_SIZE 100
 # endif
 
-// typedef enum
-// {
-// 	NONE,
-// 	SIMPLE,
-// 	MEDIUM,
-// 	COMPLEX,
-// 	ADAPTIVE,
-// 	BENCH,
-// } strategy;
+typedef enum flags
+{
+	NONE,
+	SIMPLE,
+	MEDIUM,
+	COMPLEX,
+	ADAPTIVE,
+	BENCH,
+} flags;
 
 typedef struct s_tab
 {
@@ -54,7 +54,7 @@ typedef struct s_data
 	int		value;
 }	t_data;
 
-typedef struct s_strategy
+typedef struct s_move
 {
 	int	sa;
 	int	sb;
@@ -67,23 +67,22 @@ typedef struct s_strategy
 	int	rra;
 	int	rrb;
 	int	rrr;
-}	t_strategy;
+}	t_move;
 
 
 void	ft_printf(const char *s, ...);
 bool	is_flag(char *s, t_data *data);
 int		is_valid_int(const char *s, t_data *data);
-void	strategy_use(t_data *data, t_strategy *strategy, float metric);
+void	bench(t_data *data, t_move *move, float metric);
 bool	indexing(t_tab *tab, t_data *data);
-void	print_error(void);
 void	ft_free_tab(char **tab);
 char	**ft_split(char const *s, char c, t_data *data);
 bool	parsing(int argc, char **argv, t_data *data, t_tab *tab);
 long	ft_atoi_long(const char *str);
 void	*ft_calloc(size_t count, size_t size);
-bool	push_swap(t_tab *tab, t_strategy *strategy, t_data *data);
+bool	push_swap(t_tab *tab, t_move *move, t_data *data);
 void	*ft_memcpy(void *dest, const void *src, size_t n);
-size_t	ft_strcmp(char *s1);
+size_t	compare_flag(char *s1);
 char	*ft_strdup(const char *s1);
 char	*ft_strdup2(char const *s1, char set);
 void	swap(t_tab *tab, char c);
@@ -94,14 +93,14 @@ void	rotate_b(t_tab *tab);
 void	reverse_rotate_a(t_tab *tab);
 void	reverse_rotate_b(t_tab *tab);
 float	compute_disorder(t_tab *a);
-void	simple_sort(t_tab *tab, t_strategy *strategy);
-void	medium_sort(t_tab *tab, t_strategy *strategy, size_t size);
-void	complex_sort(t_tab *tab, t_strategy *strategy, size_t size);
+void	simple_sort(t_tab *tab, t_move *move);
+void	medium_sort(t_tab *tab, t_move *move, size_t size);
+void	complex_sort(t_tab *tab, t_move *move, size_t size);
 size_t	find_range_chunk(size_t n);
 size_t	find_numbers_chunks(size_t tab_size, size_t chunk_range);
 size_t	find_high_chunk(size_t chunk_pos, size_t chunk_range, size_t tab_size);
 int		is_in_chunk(t_tab *tab, size_t low, size_t high);
 size_t	get_minimal_distance(size_t size, size_t pos);
-void	push_to_a(t_tab *tab, t_strategy *strategy);
+void	push_to_a(t_tab *tab, t_move *move);
 
 #endif

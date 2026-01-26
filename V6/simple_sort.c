@@ -3,23 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   simple_sort.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: samarkar <samarkar@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: lucpelle <lucpelle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/30 20:52:31 by lucpelle          #+#    #+#             */
-/*   Updated: 2026/01/24 17:55:53 by samarkar         ###   ########lyon.fr   */
+/*   Updated: 2026/01/26 11:46:16 by lucpelle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-static void	min_to_top(t_tab *tab, t_strategy *strategy, size_t pos, size_t i)
+static void	min_to_top(t_tab *tab, t_move *move, size_t pos, size_t i)
 {
 	if (pos <= tab->size_a / 2)
 	{
 		while (pos--)
 		{
 			rotate_a(tab);
-			strategy->ra++;
+			move->ra++;
 		}
 	}
 	else
@@ -28,12 +28,12 @@ static void	min_to_top(t_tab *tab, t_strategy *strategy, size_t pos, size_t i)
 		while (i--)
 		{
 			reverse_rotate_a(tab);
-			strategy->rra++;
+			move->rra++;
 		}
 	}
 }
 
-static void	find_min(t_tab *tab, t_strategy *strategy)
+static void	find_min(t_tab *tab, t_move *move)
 {
 	size_t	i;
 	size_t	pos;
@@ -51,25 +51,25 @@ static void	find_min(t_tab *tab, t_strategy *strategy)
 		}
 		++i;
 	}
-	min_to_top(tab, strategy, pos, i);
+	min_to_top(tab, move, pos, i);
 }
 
-void	simple_sort(t_tab *tab, t_strategy *strategy)
+void	simple_sort(t_tab *tab, t_move *move)
 {
 	while (tab->size_a > 2)
 	{
-		find_min(tab, strategy);
+		find_min(tab, move);
 		push_b(tab);
-		strategy->pb++;
+		move->pb++;
 	}
 	if (tab->a[0] > tab->a[1])
 	{
 		swap(tab, 'a');
-		strategy->sa++;
+		move->sa++;
 	}
 	while (tab->size_b > 0)
 	{
 		push_a(tab);
-		strategy->pa++;
+		move->pa++;
 	}
 }

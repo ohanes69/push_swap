@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: samarkar <samarkar@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: lucpelle <lucpelle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/12 21:52:01 by samarkar          #+#    #+#             */
-/*   Updated: 2026/01/23 20:40:36 by samarkar         ###   ########lyon.fr   */
+/*   Updated: 2026/01/26 12:02:04 by lucpelle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ int		is_integer(const char *s);
 
 size_t	find_number_of_int(char **args);
 
-void	strategy_use(size_t strategy, t_tab *a, float metric);
+void	move_use(size_t move, t_tab *a, float metric);
 
 void	set_table(char **args, t_tab *a);
 
@@ -86,7 +86,7 @@ void	*ft_calloc(size_t count, size_t size);
 void    push_swap(char **args, t_tab *a, t_tab *b, size_t size);
 
 void	*ft_memcpy(void *dest, const void *src, size_t n);
-size_t	ft_strcmp(char *s1);
+size_t	compare_flag(char *s1);
 
 void	rotate(t_tab *stack, char *str);
 void    rotate_ab(t_tab *a, t_tab *b);

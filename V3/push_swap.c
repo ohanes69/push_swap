@@ -6,7 +6,7 @@
 /*   By: lucpelle <lucpelle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/22 10:09:10 by samarkar          #+#    #+#             */
-/*   Updated: 2026/01/26 09:45:24 by lucpelle         ###   ########.fr       */
+/*   Updated: 2026/01/26 12:02:04 by lucpelle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,15 +18,15 @@ size_t	is_flag(char *s)
 	size_t	flags;
 
 	flags = 0;
-	if (ft_strcmp(s) == 1)
+	if (compare_flag(s) == 1)
 		flags++;
-	if (ft_strcmp(s) == 2)
+	if (compare_flag(s) == 2)
 		flags++;
-	if (ft_strcmp(s) == 3)
+	if (compare_flag(s) == 3)
 		flags++;
-	if (ft_strcmp(s) == 4)
+	if (compare_flag(s) == 4)
 		flags++;
-	if (ft_strcmp(s) == 5)
+	if (compare_flag(s) == 5)
 		flags++;
 	return (flags);
 }
@@ -40,15 +40,15 @@ size_t	count_flags(char **args, t_tab *stack)
 	flags = 0;
 	while (args[i])
 	{
-		if (ft_strcmp(args[i]) == 1)
+		if (compare_flag(args[i]) == 1)
 			stack->simple++;
-		if (ft_strcmp(args[i]) == 2)
+		if (compare_flag(args[i]) == 2)
 			stack->medium++;
-		if (ft_strcmp(args[i]) == 3)
+		if (compare_flag(args[i]) == 3)
 			stack->complex++;
-		if (ft_strcmp(args[i]) == 4)
+		if (compare_flag(args[i]) == 4)
 			stack->adaptive++;
-		if (ft_strcmp(args[i]) == 5)
+		if (compare_flag(args[i]) == 5)
 			stack->bench++;
 		i++;
 	}
@@ -59,39 +59,39 @@ size_t	count_flags(char **args, t_tab *stack)
 	return (flags);
 }
 
-size_t	choose_metric(size_t strategy, float metric)
+size_t	choose_metric(size_t move, float metric)
 {
 	if (metric < 0.2)
-		strategy = 1;
+		move = 1;
 	if (metric >= 0.2 && metric < 0.5)
-		strategy = 2;
+		move = 2;
 	if (metric >= 0.5)
-		strategy = 3;
-	return (strategy);
+		move = 3;
+	return (move);
 }
 
-void	choose_sort(size_t strategy, t_tab *a, t_tab *b, size_t size)
+void	choose_sort(size_t move, t_tab *a, t_tab *b, size_t size)
 {
-	if (strategy == 1)
+	if (move == 1)
 		simple_sort(a, b);
-	else if (strategy == 2)
+	else if (move == 2)
 		medium_sort(a, b, size);
-	else if (strategy == 3)
+	else if (move == 3)
 		complex_sort(a, b, size);
 }
 
-void	if_nothing_to_sort(float metric, size_t is_bench, size_t strategy, t_tab *a)
+void	if_nothing_to_sort(float metric, size_t is_bench, size_t move, t_tab *a)
 {
 	if (metric == 0 && is_bench != 5)
 		return ;
 	else if (metric == 0 && is_bench == 5)
 	{
-		strategy_use(strategy, a, metric);
+		move_use(move, a, metric);
 		return ;
 	}
 }
 
-size_t	strategy_is_5(t_tab *stack)
+size_t	move_is_5(t_tab *stack)
 {
 	if (stack->simple == 1)
 		return (1);
@@ -104,7 +104,7 @@ size_t	strategy_is_5(t_tab *stack)
 	return (0);
 }
 
-size_t	return_strategy(t_tab *stack)
+size_t	return_move(t_tab *stack)
 {
 	if (stack->bench == 1)
 		return (5);
@@ -156,44 +156,44 @@ void	set_tab_and_indexing(t_tab *a, char **args, size_t size)
 	is_duplicate(a, size);
 }
 
-void	check_metric(t_tab *a, size_t is_bench, size_t strategy)
+void	check_metric(t_tab *a, size_t is_bench, size_t move)
 {
 	float	metric;
 
 	metric = compute_disorder(a);
 	if (metric == 0)
-		if_nothing_to_sort(metric, is_bench, strategy, a);
+		if_nothing_to_sort(metric, is_bench, move, a);
 }
 
-void	if_bench_flag(size_t strategy, size_t size, t_tab *a, t_tab *b)
+void	if_bench_flag(size_t move, size_t size, t_tab *a, t_tab *b)
 {
 	float	metric;
 
 	metric = compute_disorder(a);
 
-	if (strategy == 0 || strategy == 4)
-		strategy = choose_metric(strategy, metric);
-	choose_sort(strategy, a, b, size);
-	strategy_use(strategy, a, metric);
+	if (move == 0 || move == 4)
+		move = choose_metric(move, metric);
+	choose_sort(move, a, b, size);
+	move_use(move, a, metric);
 }
 
-void	if_no_bench_flag(size_t strategy, size_t size, t_tab *a, t_tab *b)
+void	if_no_bench_flag(size_t move, size_t size, t_tab *a, t_tab *b)
 {
 	float	metric;
 
 	metric = compute_disorder(a);
-	if (strategy >= 1 && strategy <= 3)
-		choose_sort(strategy, a, b, size);
-	else if (strategy == 0 || strategy == 4)
+	if (move >= 1 && move <= 3)
+		choose_sort(move, a, b, size);
+	else if (move == 0 || move == 4)
 	{
-		strategy = choose_metric(strategy, metric);
-		choose_sort(strategy, a, b, size);
+		move = choose_metric(move, metric);
+		choose_sort(move, a, b, size);
 	}
 }
 
 void	push_swap(char **args, t_tab *a, t_tab *b, size_t size)
 {
-	size_t	strategy;
+	size_t	move;
 	size_t	is_bench;
 	float	metric;
 
@@ -210,18 +210,18 @@ void	push_swap(char **args, t_tab *a, t_tab *b, size_t size)
 		return ;
 	}
 	set_tab_and_indexing(a, args, size);
-	strategy = return_strategy(a);
-	if (strategy == 5)
+	move = return_move(a);
+	if (move == 5)
 	{
 		is_bench = 5;
-		strategy = strategy_is_5(a);
+		move = move_is_5(a);
 	}
 	if (metric == 0)
-		check_metric(a, is_bench, strategy);
+		check_metric(a, is_bench, move);
 	if (is_bench == 5)
-		if_bench_flag(strategy, size, a, b);
+		if_bench_flag(move, size, a, b);
 	else
-		if_no_bench_flag(strategy, size, a, b);
+		if_no_bench_flag(move, size, a, b);
 	free(a->tab);
 	free(b->tab);
 }

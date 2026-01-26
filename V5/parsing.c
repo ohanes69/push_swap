@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: samarkar <samarkar@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: lucpelle <lucpelle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/06 16:32:02 by samarkar          #+#    #+#             */
-/*   Updated: 2026/01/25 04:03:04 by samarkar         ###   ########lyon.fr   */
+/*   Updated: 2026/01/26 12:02:04 by lucpelle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ static int	is_flag(char *s, t_data *data)
     	return (0);
 	if (s[0] != '-' || s[1] != '-')
 		return (0);
-	flags = ft_strcmp(s);
+	flags = compare_flag(s);
 	if (flags == 0)
 		return (0);
 	if (flags >= 1 && flags <= 4)

@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   medium_sort2.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: samarkar <samarkar@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: lucpelle <lucpelle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/14 19:42:40 by lucpelle          #+#    #+#             */
-/*   Updated: 2026/01/25 03:04:53 by samarkar         ###   ########lyon.fr   */
+/*   Updated: 2026/01/26 11:46:16 by lucpelle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-static void	rotate_to_top_b(t_tab *tab, t_strategy *strategy, size_t pos)
+static void	rotate_to_top_b(t_tab *tab, t_move *move, size_t pos)
 {
 	size_t	dist_top;
 	size_t	dist_bot;
@@ -26,7 +26,7 @@ static void	rotate_to_top_b(t_tab *tab, t_strategy *strategy, size_t pos)
 		while (i < dist_top)
 		{
 			rotate_b(tab);
-			strategy->rb++;
+			move->rb++;
 			i++;
 		}
 	}
@@ -35,7 +35,7 @@ static void	rotate_to_top_b(t_tab *tab, t_strategy *strategy, size_t pos)
 		while (i < dist_bot)
 		{
 			reverse_rotate_b(tab);
-			strategy->rrb++;
+			move->rrb++;
 			i++;
 		}
 	}
@@ -64,15 +64,15 @@ static size_t	find_max_pos(t_tab *tab)
 	return (i);
 }
 
-void	push_to_a(t_tab *tab, t_strategy *strategy)
+void	push_to_a(t_tab *tab, t_move *move)
 {
 	size_t	max_b;
 
 	while (tab->size_b > 0)
 	{
 		max_b = find_max_pos(tab);
-		rotate_to_top_b(tab, strategy, max_b);
+		rotate_to_top_b(tab, move, max_b);
 		push_a(tab);
-		strategy->pa++;
+		move->pa++;
 	}
 }

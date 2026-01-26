@@ -3,20 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   set_tab.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: samarkar <samarkar@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: lucpelle <lucpelle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/20 18:41:14 by samarkar          #+#    #+#             */
-/*   Updated: 2026/01/22 14:51:15 by samarkar         ###   ########lyon.fr   */
+/*   Updated: 2026/01/26 12:02:04 by lucpelle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-size_t	set_tab_below_5(size_t strategy, t_tab *a, char **args, size_t size)
+size_t	set_tab_below_5(size_t move, t_tab *a, char **args, size_t size)
 {
 	size_t	i;
 
-	if (strategy > 0)
+	if (move > 0)
 	{
 		i = 1;
 		while (i - 1 < size)
@@ -34,16 +34,16 @@ size_t	set_tab_below_5(size_t strategy, t_tab *a, char **args, size_t size)
 			++i;
 		}
 	}
-	return (strategy);
+	return (move);
 }
 
-size_t	bench_strategy(size_t strategy, t_tab *a, char **args, size_t size)
+size_t	bench_move(size_t move, t_tab *a, char **args, size_t size)
 {
 	size_t	i;
 
 	i = 1;
-	strategy = ft_strcmp(args[i]);
-	if (strategy >= 1 && strategy <= 4)
+	move = compare_flag(args[i]);
+	if (move >= 1 && move <= 4)
 	{
 		i = 2;
 		while (i - 2 < size)
@@ -61,23 +61,23 @@ size_t	bench_strategy(size_t strategy, t_tab *a, char **args, size_t size)
 			++i;
 		}
 	}
-	return (strategy);
+	return (move);
 }
 
-size_t	set_tab(size_t strategy, t_tab *a, char **args, size_t size)
+size_t	set_tab(size_t move, t_tab *a, char **args, size_t size)
 {
-	if (strategy == 5)
+	if (move == 5)
 	{
-		strategy = bench_strategy(strategy, a, args, size);
+		move = bench_move(move, a, args, size);
 		indexing(a, size);
 		is_duplicate(a, size);
-		return (strategy);
+		return (move);
 	}
 	else
 	{
-		strategy = set_tab_below_5(strategy, a, args, size);
+		move = set_tab_below_5(move, a, args, size);
 		indexing(a, size);
 		is_duplicate(a, size);
 	}
-	return (strategy);
+	return (move);
 }

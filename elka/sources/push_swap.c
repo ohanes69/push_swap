@@ -6,7 +6,7 @@
 /*   By: lucpelle <lucpelle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/14 17:31:20 by lucpelle          #+#    #+#             */
-/*   Updated: 2026/01/22 17:36:02 by lucpelle         ###   ########.fr       */
+/*   Updated: 2026/01/26 12:02:04 by lucpelle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 #include <stdio.h>
 
 
-static void	strategy_selector(float metric, size_t strategy, t_tab *a, t_tab *b, size_t size)
+static void	move_selector(float metric, size_t move, t_tab *a, t_tab *b, size_t size)
 {
-	if (strategy == 0 || strategy == 4)
+	if (move == 0 || move == 4)
 	{
 		if (metric < 0.2)
 			simple_sort(a, b);
@@ -25,11 +25,11 @@ static void	strategy_selector(float metric, size_t strategy, t_tab *a, t_tab *b,
 		if (metric >= 0.5)
 			complex_sort(a, b, size);
 	}
-	else if (strategy == 1)
+	else if (move == 1)
 		simple_sort(a, b);
-	else if (strategy == 2)
+	else if (move == 2)
 		medium_sort(a, b, size);
-	else if (strategy == 3)
+	else if (move == 3)
 		complex_sort(a, b, size);
 }
 
@@ -49,38 +49,38 @@ static void	set_tab(size_t i, t_tab *a, char **args, size_t size)
 
 void	push_swap(char **args, t_tab *a, t_tab *b, size_t size)
 {
-	size_t	strategy;
+	size_t	move;
 	size_t	is_bench;
 	size_t	i;
 	float	metric;
 
-	strategy = 0;
+	move = 0;
 	is_bench = 0;
 	i = 0;
 	
 	if (args[0][0] == '-' && args[0][1] == '-')
 	{
-		strategy = ft_strcmp(args[0]);
-		if (strategy == 0)
+		move = compare_flag(args[0]);
+		if (move == 0)
 			return ;
 		size--;
 		i++;
 	}
 	if (args[1][0] == '-' && args[1][1] == '-')
 	{
-		is_bench = ft_strcmp(args[1]);
-		if (strategy == 0)
+		is_bench = compare_flag(args[1]);
+		if (move == 0)
 			return ;
 		size--;
 		i++;
 	}
-	if (strategy == is_bench && strategy != 0)
+	if (move == is_bench && move != 0)
 		return ;
-	if (strategy == 5)
+	if (move == 5)
 	{
 		int	tmp;
-		tmp = strategy;
-		strategy = is_bench;
+		tmp = move;
+		move = is_bench;
 		is_bench = tmp;
 	}
 	a->size = size;
@@ -99,14 +99,14 @@ void	push_swap(char **args, t_tab *a, t_tab *b, size_t size)
 	i = 0;
 	if (metric == 0.000000 && is_bench == 5)
 	{
-		strategy_use(strategy, a, metric);
+		move_use(move, a, metric);
 		free(a->tab);
 		free(b->tab);
 		return ;
 	}
-	strategy_selector(metric, strategy, a, b, size);
+	move_selector(metric, move, a, b, size);
 	if (is_bench == 5)
-		strategy_use(strategy, a, metric);
+		move_use(move, a, metric);
 	free(a->tab);
 	free(b->tab);
 }

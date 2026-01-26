@@ -1,6 +1,6 @@
 A CORRIGER :
 
-Pouvoir inverser --bench et --strategy.
+Pouvoir inverser --bench et --move.
 Refactoriser les fonctions trop longues. (Push Swap, Main, Parsing)
 Norminette.
 Clean.

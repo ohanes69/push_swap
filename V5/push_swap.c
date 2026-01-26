@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: samarkar <samarkar@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: lucpelle <lucpelle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/22 10:09:10 by samarkar          #+#    #+#             */
-/*   Updated: 2026/01/25 18:23:40 by samarkar         ###   ########lyon.fr   */
+/*   Updated: 2026/01/26 11:46:16 by lucpelle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,22 +23,22 @@ static void	choose_metric(t_data *data, float metric)
 		data->flag1 = 3;
 }
 
-static void	choose_sort(t_data *data, t_tab *tab, t_strategy *strategy)
+static void	choose_sort(t_data *data, t_tab *tab, t_move *move)
 {
 	if (data->flag1 == 1)
-		simple_sort(tab, strategy);
+		simple_sort(tab, move);
 	else if (data->flag1 == 2)
-		medium_sort(tab, strategy, tab->size_a);
+		medium_sort(tab, move, tab->size_a);
 	else if (data->flag1 == 3)
-		complex_sort(tab, strategy, tab->size_a);
+		complex_sort(tab, move, tab->size_a);
 }
 
-static void	sort_tab(t_data *data, t_tab *tab, t_strategy *s, float metric)
+static void	sort_tab(t_data *data, t_tab *tab, t_move *s, float metric)
 {
 	if (metric == 0)
 	{
 		if (data->flag2 == 5)
-			strategy_use(data, s, metric);
+			move_use(data, s, metric);
 		return ;
 	}
 	if (data->flag1 >= 1 && data->flag1 <= 3)
@@ -49,10 +49,10 @@ static void	sort_tab(t_data *data, t_tab *tab, t_strategy *s, float metric)
 		choose_sort(data, tab, s);
 	}
 	if (data->flag2 == 5)
-		strategy_use(data, s, metric);
+		move_use(data, s, metric);
 }
 
-void	push_swap(t_tab *tab, t_strategy *strategy, t_data *data)
+void	push_swap(t_tab *tab, t_move *move, t_data *data)
 {
 	float	metric;
 
@@ -67,7 +67,7 @@ void	push_swap(t_tab *tab, t_strategy *strategy, t_data *data)
 	}
 	indexing(tab);
 	metric = compute_disorder(tab);
-	sort_tab(data, tab, strategy, metric);
+	sort_tab(data, tab, move, metric);
 	free(tab->a);
 	free(tab->b);
 }

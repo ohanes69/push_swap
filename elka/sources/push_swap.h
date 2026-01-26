@@ -6,7 +6,7 @@
 /*   By: lucpelle <lucpelle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/12 21:52:01 by samarkar          #+#    #+#             */
-/*   Updated: 2026/01/22 15:40:54 by lucpelle         ###   ########.fr       */
+/*   Updated: 2026/01/26 12:02:04 by lucpelle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ typedef struct s_buffer
 	int		len;
 }	t_buffer;
 
-void	strategy_use(size_t strategy, t_tab *a, float metric);
+void	move_use(size_t move, t_tab *a, float metric);
 
 int		is_valid_int(const char *s);
 void	is_duplicate(t_tab *a, size_t size);
@@ -64,7 +64,7 @@ void	*ft_calloc(size_t count, size_t size);
 
 
 void	*ft_memcpy(void *dest, const void *src, size_t n);
-size_t	ft_strcmp(char *s1);
+size_t	compare_flag(char *s1);
 
 void	rotate(t_tab *stack, char *str);
 void    rotate_ab(t_tab *a, t_tab *b);

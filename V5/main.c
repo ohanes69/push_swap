@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: samarkar <samarkar@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: lucpelle <lucpelle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/22 11:02:56 by samarkar          #+#    #+#             */
-/*   Updated: 2026/01/25 18:22:05 by samarkar         ###   ########lyon.fr   */
+/*   Updated: 2026/01/26 11:46:16 by lucpelle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 #include <stdio.h>
 
-static void	init_stack(t_strategy *stack)
+static void	init_stack(t_move *stack)
 {
 	stack->sa = 0;
 	stack->sb = 0;
@@ -28,12 +28,12 @@ static void	init_stack(t_strategy *stack)
 	stack->rrr = 0;
 }
 
-static void	free_all(t_tab *tab, t_strategy *strategy, t_data *data)
+static void	free_all(t_tab *tab, t_move *move, t_data *data)
 {
 	if (tab)
 		free(tab);
-	if (strategy)
-		free(strategy);
+	if (move)
+		free(move);
 	if (data)
 		free(data);
 }
@@ -41,21 +41,21 @@ static void	free_all(t_tab *tab, t_strategy *strategy, t_data *data)
 int	main(int ac, char **av)
 {
 	t_tab		*tab;
-	t_strategy	*strategy;
+	t_move	*move;
 	t_data		*data;
 
 	if (ac <= 2)
 		return (0);
 	tab = malloc(sizeof(t_tab));
-	strategy = malloc(sizeof(t_strategy));
+	move = malloc(sizeof(t_move));
 	data = malloc(sizeof(t_data));
-	if (!tab || !strategy || !data)
+	if (!tab || !move || !data)
 	{
-		free_all(tab, strategy, data);
+		free_all(tab, move, data);
 		return (1);
 	}
-	init_stack(strategy);
+	init_stack(move);
 	tab = parsing(ac, av, tab, data);
-	push_swap(tab, strategy, data);
-	free_all(tab, strategy, data);
+	push_swap(tab, move, data);
+	free_all(tab, move, data);
 }

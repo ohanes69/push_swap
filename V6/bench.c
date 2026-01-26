@@ -6,7 +6,7 @@
 /*   By: lucpelle <lucpelle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/19 14:07:23 by samarkar          #+#    #+#             */
-/*   Updated: 2026/01/26 11:00:59 by lucpelle         ###   ########.fr       */
+/*   Updated: 2026/01/26 12:09:19 by lucpelle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,38 +28,38 @@ static void	print_disorder(float disorder)
 	ft_printf("%%");
 }
 
-static void	operations(t_strategy *strategy)
+static void	count_ops(t_move *move)
 {
 	int	total_ops;
 
-	total_ops = strategy->sa + strategy->sb + strategy->ss
-		+ strategy->pa + strategy->pb + strategy->ra + strategy->rb
-		+ strategy->rr + strategy->rra + strategy->rrb + strategy->rrr;
+	total_ops = move->sa + move->sb + move->ss
+		+ move->pa + move->pb + move->ra + move->rb
+		+ move->rr + move->rra + move->rrb + move->rrr;
 	ft_printf("\n[bench] total_ops: ");
 	ft_printf("%d", total_ops);
 	ft_printf("\n[bench] ");
-	ft_printf("sa: %d ", strategy->sa);
-	ft_printf("sb: %d ", strategy->sb);
-	ft_printf("ss: %d ", strategy->ss);
-	ft_printf("pa: %d ", strategy->pa);
-	ft_printf("pb: %d ", strategy->pb);
+	ft_printf("sa: %d ", move->sa);
+	ft_printf("sb: %d ", move->sb);
+	ft_printf("ss: %d ", move->ss);
+	ft_printf("pa: %d ", move->pa);
+	ft_printf("pb: %d ", move->pb);
 	ft_printf("\n[bench] ");
-	ft_printf("ra: %d ", strategy->ra);
-	ft_printf("rb: %d ", strategy->rb);
-	ft_printf("rr: %d ", strategy->rr);
-	ft_printf("rra: %d ", strategy->rra);
-	ft_printf("rrb: %d ", strategy->rrb);
-	ft_printf("rrr: %d\n", strategy->rrr);
+	ft_printf("ra: %d ", move->ra);
+	ft_printf("rb: %d ", move->rb);
+	ft_printf("rr: %d ", move->rr);
+	ft_printf("rra: %d ", move->rra);
+	ft_printf("rrb: %d ", move->rrb);
+	ft_printf("rrr: %d\n", move->rrr);
 }
 
-void	strategy_use(t_data *data, t_strategy *strategy, float metric)
+void	bench(t_data *data, t_move *move, float metric)
 {
 	print_disorder(metric);
 	ft_printf("\n[bench] ");
-	ft_printf("strategy:");
+	ft_printf("move:");
 	if (metric > 0)
 	{
-		if (data->flag1 == 0 || data->flag1 == 4)
+		if (data->flag1 == NONE || data->flag1 == ADAPTIVE)
 		{
 			if (metric < 0.2)
 				ft_printf(" Simple / O(n²)");
@@ -68,12 +68,12 @@ void	strategy_use(t_data *data, t_strategy *strategy, float metric)
 			if (metric >= 0.5)
 				ft_printf(" Complex / O(n log n)");
 		}
-		if (data->flag1 == 1)
+		if (data->flag1 == SIMPLE)
 			ft_printf(" Simple / O(n²)");
-		else if (data->flag1 == 2)
+		else if (data->flag1 == MEDIUM)
 			ft_printf(" Medium / O(n√n)");
-		else if (data->flag1 == 3)
+		else if (data->flag1 == COMPLEX)
 			ft_printf(" Complex / O(n log n)");
 	}
-	operations(strategy);
+	count_ops(move);
 }

@@ -6,7 +6,7 @@
 /*   By: lucpelle <lucpelle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/12 21:52:01 by samarkar          #+#    #+#             */
-/*   Updated: 2026/01/26 08:23:56 by lucpelle         ###   ########.fr       */
+/*   Updated: 2026/01/26 12:02:04 by lucpelle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ typedef struct s_buffer
 typedef struct s_data
 {
 	size_t	size;
-	size_t	strategy;
+	size_t	move;
 	size_t	bench;
 	size_t	flag1;
 	size_t	flag2;
@@ -46,7 +46,7 @@ typedef struct s_data
 	int		value;
 }	t_data;
 
-typedef struct s_strategy
+typedef struct s_move
 {
 	int	sa;
 	int	sb;
@@ -59,7 +59,7 @@ typedef struct s_strategy
 	int	rra;
 	int	rrb;
 	int	rrr;
-}	t_strategy;
+}	t_move;
 
 
 void	ft_printf(const char *s, ...);
@@ -72,7 +72,7 @@ int		is_integer(const char *s);
 
 size_t	find_number_of_int(char **args);
 
-void	strategy_use(size_t strategy, t_tab *a, float metric);
+void	move_use(size_t move, t_tab *a, float metric);
 
 void	set_table(char **args, t_tab *a);
 
@@ -95,7 +95,7 @@ void	*ft_calloc(size_t count, size_t size);
 void    push_swap(char **args, t_tab *a, t_tab *b, size_t size);
 
 void	*ft_memcpy(void *dest, const void *src, size_t n);
-size_t	ft_strcmp(char *s1);
+size_t	compare_flag(char *s1);
 char	*ft_strdup(const char *s1);
 char	*ft_strdup2(char const *s1, char set);
 

@@ -6,65 +6,65 @@
 /*   By: lucpelle <lucpelle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/14 17:31:20 by lucpelle          #+#    #+#             */
-/*   Updated: 2026/01/22 15:37:01 by lucpelle         ###   ########.fr       */
+/*   Updated: 2026/01/26 12:02:04 by lucpelle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 #include <stdio.h>
 
-size_t	choose_metric(size_t strategy, float metric)
+size_t	choose_metric(size_t move, float metric)
 {
 	if (metric < 0.2)
-		strategy = 1;
+		move = 1;
 	if (metric >= 0.2 && metric < 0.5)
-		strategy = 2;
+		move = 2;
 	if (metric >= 0.5)
-		strategy = 3;
-	return (strategy);
+		move = 3;
+	return (move);
 }
 
-void	choose_sort(size_t strategy, t_tab *a, t_tab *b, size_t size)
+void	choose_sort(size_t move, t_tab *a, t_tab *b, size_t size)
 {
-	if (strategy == 1)
+	if (move == 1)
 		simple_sort(a, b);
-	else if (strategy == 2)
+	else if (move == 2)
 		medium_sort(a, b, size);
-	else if (strategy == 3)
+	else if (move == 3)
 		complex_sort(a, b, size);
 }
 
-void	if_nothing_to_sort(float metric, size_t is_bench, size_t strategy, t_tab *a)
+void	if_nothing_to_sort(float metric, size_t is_bench, size_t move, t_tab *a)
 {
 	if (metric == 0.000000 && is_bench != 5)
 		return ;
 	else if (metric == 0.000000 && is_bench == 5)
 	{
-		strategy_use(strategy, a, metric);
+		move_use(move, a, metric);
 		return ;
 	}
 }
 
-size_t	find_size(char **args, size_t strategy, size_t size)
+size_t	find_size(char **args, size_t move, size_t size)
 {
-	if (strategy > 0 && args[1][0] == '-' && args[1][1] == '-')
+	if (move > 0 && args[1][0] == '-' && args[1][1] == '-')
 		--size;
-	if (strategy > 0)
+	if (move > 0)
 		--size;
 	return (size);
 }
 
 void	push_swap(char **args, t_tab *a, t_tab *b, size_t size)
 {
-	size_t	strategy;
+	size_t	move;
 	size_t	is_bench;
 	float	metric;
 
-	strategy = 0;
+	move = 0;
 	if (args[0][0] == '-' && args[0][1] == '-')
-		strategy = ft_strcmp(args[0]);
-	is_bench = strategy;
-	size = find_size(args, strategy, size);
+		move = compare_flag(args[0]);
+	is_bench = move;
+	size = find_size(args, move, size);
 	__builtin_printf("%zu", size);
 	// a->size = size;
 	// a->tab = malloc(sizeof(int) * size);
@@ -74,22 +74,22 @@ void	push_swap(char **args, t_tab *a, t_tab *b, size_t size)
 	// 	return ;
 	// }
 	// b->size = 0;
-	// strategy = set_tab(strategy, a, args, size);
+	// move = set_tab(move, a, args, size);
 	// metric = compute_disorder(a);
 	// if (metric == 0.000000)
 	// {
-	// 	if_nothing_to_sort(metric, is_bench, strategy, a);
+	// 	if_nothing_to_sort(metric, is_bench, move, a);
 	// 	return ;
 	// }
-	// if (strategy == 0 || strategy == 4)
-	// 	strategy = choose_metric(strategy, metric);
+	// if (move == 0 || move == 4)
+	// 	move = choose_metric(move, metric);
 	// b->tab = malloc(sizeof(int) * size);
 	// if (!b->tab)
 	// {
 	// 	free(b->tab);
 	// 	return ;
 	// }
-	// choose_sort(strategy, a, b, size);
+	// choose_sort(move, a, b, size);
 	// if (is_bench == 5)
-	// 	strategy_use(strategy, a, metric);
+	// 	move_use(move, a, metric);
 }

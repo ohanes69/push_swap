@@ -6,7 +6,7 @@
 /*   By: lucpelle <lucpelle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/06 16:32:02 by samarkar          #+#    #+#             */
-/*   Updated: 2026/01/26 11:42:52 by lucpelle         ###   ########.fr       */
+/*   Updated: 2026/01/26 12:09:42 by lucpelle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,21 +101,21 @@ bool	is_flag(char *s, t_data *data)
 
 	if (!s[0] || !s[1] || s[0] != '-' || s[1] != '-')
     	return (false);
-	flags = ft_strcmp(s);
-	if (flags == 0)
+	flags = compare_flag(s);
+	if (flags == NONE)
 		return (false);
 	if (flags == data->flag1 || flags == data->flag2)
 		return (false);
-	if (flags >= 1 && flags <= 4)
+	if (flags >= SIMPLE && flags <= ADAPTIVE)
 	{
-		if (data->flag1 != 0)
+		if (data->flag1 != NONE)
 			return (false);
 		else
 			data->flag1 = flags;
 	}
-	if (flags == 5)
+	if (flags == BENCH)
 	{
-		if (data->flag2 != 0)
+		if (data->flag2 != NONE)
 			return (false);
 		else
 			data->flag2 = flags;	
@@ -206,8 +206,8 @@ bool	parsing(int argc, char **argv, t_data *data, t_tab *tab)
 	if (!args)
 		return (false);
 	count_flag(data, args);
-	data->flag1 = 0;
-	data->flag2 = 0;
+	data->flag1 = NONE;
+	data->flag2 = NONE;
 	if (!init_tab(args, data, tab))
 	{	
 		ft_free_tab(args);

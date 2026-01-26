@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   medium_sort.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: samarkar <samarkar@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: lucpelle <lucpelle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/12 20:18:46 by samarkar          #+#    #+#             */
-/*   Updated: 2026/01/25 18:07:16 by samarkar         ###   ########lyon.fr   */
+/*   Updated: 2026/01/26 11:46:16 by lucpelle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 #include <stdio.h>
 
-static void	rotate_to_top(t_tab *tab, t_strategy *strategy, size_t pos)
+static void	rotate_to_top(t_tab *tab, t_move *move, size_t pos)
 {
 	size_t	dist_top;
 	size_t	dist_bot;
@@ -27,7 +27,7 @@ static void	rotate_to_top(t_tab *tab, t_strategy *strategy, size_t pos)
 		while (i < dist_top)
 		{
 			rotate_a(tab);
-			strategy->ra++;
+			move->ra++;
 			i++;
 		}
 	}
@@ -36,7 +36,7 @@ static void	rotate_to_top(t_tab *tab, t_strategy *strategy, size_t pos)
 		while (i < dist_bot)
 		{
 			reverse_rotate_a(tab);
-			strategy->rra++;
+			move->rra++;
 			i++;
 		}
 	}
@@ -68,7 +68,7 @@ static size_t	find_closest_in_chunk(t_tab *tab, size_t low, size_t high)
 	return (best_pos);
 }
 
-static void	rotate_push_elem(t_tab *tab, t_strategy *s, size_t low, size_t high)
+static void	rotate_push_elem(t_tab *tab, t_move *s, size_t low, size_t high)
 {
 	size_t	pos;
 
@@ -80,7 +80,7 @@ static void	rotate_push_elem(t_tab *tab, t_strategy *s, size_t low, size_t high)
 	s->pb++;
 }
 
-static void	push_chunk_to_b(t_tab *tab, t_strategy *s, size_t low, size_t high)
+static void	push_chunk_to_b(t_tab *tab, t_move *s, size_t low, size_t high)
 {
 	while (is_in_chunk(tab, low, high) == 1)
 	{
@@ -93,7 +93,7 @@ static void	push_chunk_to_b(t_tab *tab, t_strategy *s, size_t low, size_t high)
 	}
 }
 
-void	medium_sort(t_tab *tab, t_strategy *strategy, size_t size)
+void	medium_sort(t_tab *tab, t_move *move, size_t size)
 {
 	size_t	chunk_range;
 	size_t	nb_chunks;
@@ -108,8 +108,8 @@ void	medium_sort(t_tab *tab, t_strategy *strategy, size_t size)
 	{
 		low = chunk_pos * chunk_range;
 		high = find_high_chunk(chunk_pos, chunk_range, size);
-		push_chunk_to_b(tab, strategy, low, high);
+		push_chunk_to_b(tab, move, low, high);
 		chunk_pos++;
 	}
-	push_to_a(tab, strategy);
+	push_to_a(tab, move);
 }

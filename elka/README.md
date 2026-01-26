@@ -33,7 +33,7 @@ make fclean
 make re
 ```
 
-**Optional strategy selector**:
+**Optional move selector**:
 
 | Option         | Description |
 |----------------|-------------|
@@ -44,9 +44,9 @@ make re
 
 ## Algorithm and Data Structure
 
-Push Swap uses **two stacks** (`a` and `b`) and selects the sorting strategy based on the **disorder of the input** and the number of elements.
+Push Swap uses **two stacks** (`a` and `b`) and selects the sorting move based on the **disorder of the input** and the number of elements.
 
-The program computes a **disorder metric** to estimate how unsorted the input stack is. This metric can guide the **adaptive strategy**, deciding whether a simple, medium, or complex algorithm will be more efficient.
+The program computes a **disorder metric** to estimate how unsorted the input stack is. This metric can guide the **adaptive move**, deciding whether a simple, medium, or complex algorithm will be more efficient.
 
 ### Sorting Strategies
 

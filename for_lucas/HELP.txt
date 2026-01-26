@@ -1,6 +1,6 @@
 A CORRIGER :
 
-Pouvoir inverser --bench et --strategy.
+Pouvoir inverser --bench et --move.
 Refactoriser les fonctions trop longues.
 Faire marcher le disorder.
 Norminette.

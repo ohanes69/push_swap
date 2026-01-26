@@ -6,7 +6,7 @@
 /*   By: lucpelle <lucpelle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/19 14:07:23 by samarkar          #+#    #+#             */
-/*   Updated: 2026/01/22 16:02:39 by lucpelle         ###   ########.fr       */
+/*   Updated: 2026/01/26 11:46:16 by lucpelle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,11 +71,11 @@ static void	operations(t_tab *a)
 	ft_printf("rrr: %d\n", a->rrr);
 }
 
-void	strategy_use(size_t strategy, t_tab *a, float metric)
+void	move_use(size_t move, t_tab *a, float metric)
 {
 	print_disorder(metric);
 	ft_printf("\n[bench] ");
-	ft_printf("strategy:");
+	ft_printf("move:");
 	if (metric > 0 && metric < 0.2)
 		ft_printf(" Simple / O(n²)");
 	else if (metric >= 0.2 && metric < 0.5)
