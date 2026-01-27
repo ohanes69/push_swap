@@ -6,7 +6,7 @@
 /*   By: samarkar <samarkar@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/12 20:36:10 by samarkar          #+#    #+#             */
-/*   Updated: 2026/01/26 23:18:19 by samarkar         ###   ########lyon.fr   */
+/*   Updated: 2026/01/27 13:13:16 by samarkar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,8 @@ int	is_valid_int(const char *s, t_data *data)
 	i = 0;
 	digits = 0;
 	if (s[i] == '+' || s[i] == '-')
+		i++;
+	while (s[i] == '0')
 		i++;
 	while (s[i])
 	{

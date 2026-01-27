@@ -6,7 +6,7 @@
 /*   By: samarkar <samarkar@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/06 16:32:02 by samarkar          #+#    #+#             */
-/*   Updated: 2026/01/26 23:21:43 by samarkar         ###   ########lyon.fr   */
+/*   Updated: 2026/01/27 13:17:16 by samarkar         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,16 +43,31 @@ bool	init_tab(char **args, t_data *data, t_tab *tab)
 	return (true);
 }
 
-static int	only_spaces_or_flags(char **args)
+static bool	check_args(char **args)
 {
 	if (args[0] == NULL)
-		return (0);
+	{
+		free(args);
+		return (false);
+	}
 	if (compare_flag(args[0]) > 0 && args[1] == NULL)
-		return (0);
+	{
+		ft_free_tab(args);
+		return (false);
+	}
 	if (compare_flag(args[0]) > 0 && compare_flag(args[1]) > 0
 		&& args[2] == NULL)
-		return (0);
-	return (1);
+	{
+		ft_free_tab(args);
+		return (false);
+	}
+	if ((args[0][0] == '-' || args[0][0] == '+')
+		&& args[0][1] == '\0')
+	{
+		ft_free_tab(args);
+		return (false);
+	}
+	return (true);
 }
 
 static char	*join_args(int argc, char **argv)
@@ -94,7 +109,7 @@ bool	parsing(int argc, char **argv, t_data *data, t_tab *tab)
 	free(args_join);
 	if (!args)
 		return (false);
-	if (only_spaces_or_flags(args) == 0)
+	if (!check_args(args))
 		return (false);
 	count_flag(data, args);
 	data->flag_strategy = NONE;
